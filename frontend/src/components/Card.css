@@ -1,14 +1,6 @@
-.resizable__body {
-	background-color: rgb(255, 255, 255);
-	margin: 20px;
-	display: flex;
-	align-items: center;
-	box-shadow: 2px 2px 7px 4px rgb(219, 219, 219);
-}
 .blog__body {
 	padding: 10px;
 	display: flex;
-	margin-bottom: -50px !important;
 	border-bottom: 1px solid lightgray;
 }
 .blog__left {

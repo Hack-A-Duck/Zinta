@@ -37,7 +37,6 @@ function NavbarTop() {
             </Link>
 
           </Nav>
-          {/* <NavbarText>Simple Text</NavbarText> */}
         </Collapse>
       </Navbar>
     </div>
