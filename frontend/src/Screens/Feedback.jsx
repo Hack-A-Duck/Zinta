@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, CustomInput } from "reactstrap";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./Feedback.css";
-function Feedback() {
+
+import NavbarTop from "../components/NavbarTop";
+
+const Feedback = () => {
 	const [modal, setModal] = useState(false);
 	const toggle = () => setModal(!modal);
 	const closeBtn = (
@@ -13,6 +16,10 @@ function Feedback() {
 
 	//handleSubmit()
 	return (
+		<>
+		<div>
+			<NavbarTop />
+		</div>
 		<div className="feedback__form">
 			<h2>YOUR OPINION MATTERS</h2>
 			<Form>
@@ -105,6 +112,7 @@ function Feedback() {
 				</Modal>
 			</Form>
 		</div>
+		</>
 	);
 }
 
