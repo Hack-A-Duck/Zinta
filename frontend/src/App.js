@@ -7,7 +7,6 @@ function App() {
 	return (
 		<Router>
 			<div className="app">
-				{/* <NavbarTop /> */}
 				<Switch>
 					<Route exact path="/">
 						<Home />
