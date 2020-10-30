@@ -7,9 +7,9 @@ import ('../node_modules/react-resizable/css/styles.css');
 import ("bootstrap/dist/css/bootstrap.css");
 
 ReactDOM.render(
-	<React.StrictMode>
+	<div>
 		<App />
-	</React.StrictMode>,
+	</div>,
 	document.getElementById("root")
 );
 

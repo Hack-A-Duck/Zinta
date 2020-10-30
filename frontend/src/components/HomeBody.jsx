@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomeBody.css";
-import Card from "../components/Card";
 import { Resizable } from "re-resizable";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-
 import GridLayout from "react-grid-layout";
 import { Link } from "react-router-dom";
 import FooterDown from "./FooterDown";
