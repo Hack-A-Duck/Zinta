@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../components/FooterDown.css";
+import fire from "../components/firebase";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import Login from "./Login";
+import Admin from "../Screens/Admin";
+import { Link, Redirect } from "react-router-dom";
 
 function FooterDown() {
 	const [modal, setModal] = useState(false);
@@ -13,6 +17,58 @@ function FooterDown() {
 			&times;
 		</button>
 	);
+	const [user, setUser] = useState("");
+	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passwordError, setPasswordError] = useState("");
+
+	const clearInputs = () => {
+		setEmail("");
+		setPassword("");
+	};
+
+	const clearErrors = () => {
+		setEmailError("");
+		setPasswordError("");
+	};
+	const handleLogin = () => {
+		clearErrors();
+		fire
+			.auth()
+			.signInWithEmailAndPassword(email, password)
+			.catch((err) => {
+				switch (err.code) {
+					case "auth/invalid-email":
+					case "auth/user-disabled":
+					case "auth/user-not-found":
+						setEmailError(err.message);
+						break;
+					case "auth/wrong-password":
+						setPasswordError(err.message);
+						break;
+				}
+			});
+	};
+
+	const handleLogOut = () => {
+		fire.auth().signOut();
+	};
+
+	const authListener = () => {
+		fire.auth().onAuthStateChanged((user) => {
+			if (user) {
+				clearInputs();
+				setUser(user);
+			} else {
+				setUser("");
+			}
+		});
+	};
+
+	useEffect(() => {
+		authListener();
+	}, []);
 	return (
 		<>
 			<MDBFooter color="indigo" className="font-small pt-0 entire__footer">
@@ -98,16 +154,34 @@ function FooterDown() {
 					</MDBContainer>
 				</div>
 			</MDBFooter>
+			{/* MODAL GOES HERE */}
 			<Modal isOpen={modal} toggle={toggle}>
 				<ModalHeader toggle={toggle} close={closeBtn}>
 					LOGIN
 				</ModalHeader>
 				<ModalBody>
-					<p>A form will go here, login credentials needed</p>
+					{user ? (
+						<>
+							{/* <Admin handleLogOut={handleLogOut} /> */}
+							<Redirect to={`/admin/`} />
+						</>
+					) : (
+						<Login
+							email={email}
+							setEmail={setEmail}
+							password={password}
+							setPassword={setPassword}
+							handleLogin={handleLogin}
+							emailError={emailError}
+							setEmailError={setEmailError}
+							passwordError={passwordError}
+							setPasswordError={setPasswordError}
+						/>
+					)}
 				</ModalBody>
 				<ModalFooter>
-					<Button color="primary" onClick={toggle}>
-						Ok!
+					<Button color="primary" onClick={handleLogin}>
+						Login
 					</Button>
 					<Button color="secondary" onClick={toggle}>
 						Cancel
