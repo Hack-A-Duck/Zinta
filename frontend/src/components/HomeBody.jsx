@@ -2,23 +2,14 @@ import React, { useState } from "react";
 import "./HomeBody.css";
 import Card from "../components/Card";
 import { Resizable } from "re-resizable";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 import GridLayout from "react-grid-layout";
 import { Link } from "react-router-dom";
+import FooterDown from "./FooterDown";
 
 const HomeBody = (props) => {
 	// console.log("homebody", props);
-	const [modal, setModal] = useState(false);
-
-	const toggle = () => setModal(!modal);
-
-	const closeBtn = (
-		<button className="close" onClick={toggle}>
-			&times;
-		</button>
-	);
 
 	const blogInfo = [
 		{
@@ -187,28 +178,7 @@ const HomeBody = (props) => {
           return <Card info={current} />;
         })}
 			</div> */}
-
-			<footer className="home__footer">
-				<Button color="danger" onClick={toggle} style={{ margin: "10px" }}>
-					Admin/Login
-				</Button>
-				<Modal isOpen={modal} toggle={toggle}>
-					<ModalHeader toggle={toggle} close={closeBtn}>
-						LOGIN
-					</ModalHeader>
-					<ModalBody>
-						<p>A form will go here, login credentials needed</p>
-					</ModalBody>
-					<ModalFooter>
-						<Button color="primary" onClick={toggle}>
-							Ok!
-						</Button>
-						<Button color="secondary" onClick={toggle}>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-			</footer>
+			<FooterDown />
 		</div>
 	);
 };
