@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Button } from "reactstrap";
 import fire from "../components/firebase";
+import NavbarAdmin from "../components/NavbarAdmin";
 
 function Admin() {
 
@@ -10,17 +11,11 @@ function Admin() {
 			window.location.href = "/";
 		}
 	});
-	
-
-	const handleLogout = async () => {
-		localStorage.removeItem('user-session');
-		await fire.auth().signOut();
-		window.location.href = "/";
-	}
 
 	return (
 		<div className="admin">
-			<Button onClick={handleLogout}>Logout</Button>
+			<NavbarAdmin />
+			<h1>Admin screen</h1>
 		</div>
 	);
 }

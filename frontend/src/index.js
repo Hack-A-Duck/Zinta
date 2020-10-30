@@ -7,9 +7,9 @@ import ('../node_modules/react-resizable/css/styles.css');
 import ("bootstrap/dist/css/bootstrap.css");
 
 ReactDOM.render(
-	<>
+	<div>
 		<App />
-	</>,
+	</div>,
 	document.getElementById("root")
 );
 
