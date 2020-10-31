@@ -30,26 +30,12 @@ footer {
 	border: none !important;
 	outline: none !important;
 	background-color: #8572f0 !important;
-	font-size: 50px !important;
+	font-size: 40px !important;
 	padding: 0 !important;
-	margin-top: -30px;
+	margin-top: -38px;
+	margin-bottom: -25px;
 }
 .btn .btn-primary {
 	padding: 0 !important;
 	margin: 0 !important;
-}
-.social__icons {
-	text-align: center;
-	margin-top: 10px;
-}
-.social__icons a,
-.social__icons i {
-	color: white !important;
-	font-size: larger;
-	cursor: pointer;
-	transition: all 0.2s ease;
-}
-
-.social__icons i:hover {
-	transform: scale(1.4);
 }
