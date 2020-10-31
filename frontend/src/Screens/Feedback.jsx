@@ -3,7 +3,10 @@ import { Form, FormGroup, Label, Input, CustomInput } from "reactstrap";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import FooterDown from "../components/FooterDown";
 import NavbarTop from "../components/NavbarTop";
+import StarRatings from 'react-star-ratings';
+
 import "./Feedback.css";
+
 function Feedback() {
 	const [modal, setModal] = useState(false);
 	const toggle = () => setModal(!modal);
@@ -12,6 +15,8 @@ function Feedback() {
 			&times;
 		</button>
 	);
+
+	const [rating, setRating] = useState(0);
 
 	//handleSubmit()
 	return (
@@ -85,15 +90,18 @@ function Feedback() {
 						<Input type="textarea" name="text" id="exampleText" />
 					</FormGroup>
 
-					<FormGroup>
-						<Label for="exampleSelect">Out of 5, please rate the blog ⭐</Label>
-						<Input type="select" name="select" id="exampleSelect">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-						</Input>
+					<FormGroup style={{display: "flex", flexDirection: "column"}}>
+						<Label>Out of 5, please rate the blog </Label>
+						
+						<StarRatings 
+							rating={rating}
+							starRatedColor="#FFD700"
+							changeRating={(newRating) => {setRating(newRating)}}
+							numberOfStars={5}
+							starDimension="40px"
+							starSpacing="15px"
+						/>
+
 					</FormGroup>
 
 					<Button color="success" onClick={toggle}>
