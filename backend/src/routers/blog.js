@@ -3,9 +3,9 @@ const Blog = require('../models/blog');
 const router = new express.Router();
 
 // Getting all blogs
-router.get('', async (req, res) => {
+router.get('/api/get-blogs', async (req, res) => {
     try {
-        var blogs = await Blog.find();
+        var blogs = await Blog.find({});
         res.send(blogs);
     } catch (e) {
         res.status(400).send(e);
@@ -13,7 +13,7 @@ router.get('', async (req, res) => {
 });
 
 // Creating new blog
-router.post('', async (req, res) => {
+router.post('/api/create-blog', async (req, res) => {
     const blog = new Blog(req.body);
     try {
         await blog.save();
@@ -24,7 +24,8 @@ router.post('', async (req, res) => {
 });
 
 // Toggling visibility
-router.post('', async (req,res) => {
+router.patch('/api/toggle-visibility', async (req,res) => {
+    // id of blog
     var newVisibility = {
         "visibility": req.body.visibility // CHECK WHETHER THIS LINE IS OK? 
     }
@@ -33,7 +34,7 @@ router.post('', async (req,res) => {
 });
 
 // Adding comment
-router.post('', async (req, res) => {
+router.post('/api/add-comment', async (req, res) => {
     var blog = await Blog.findById(req.body.id);
     blog.comments.push(req.body.comment);
     try {
@@ -45,7 +46,7 @@ router.post('', async (req, res) => {
 });
 
 // Updating blog
-router.patch('', async (req, res) => {
+router.patch('/api/update-blog', async (req, res) => {
     try {
         var blog = await Blog.findByIdAndUpdate(req.params.id, req.body);
         res.status(200).send({blog});
@@ -55,7 +56,7 @@ router.patch('', async (req, res) => {
 });
 
 // Deleting blog
-router.delete('', async (req, res) => {
+router.delete('/api/delete-blog', async (req, res) => {
     const blog = await Blog.findByIdAndDelete(req.params.id);
     try {
         if(!blog)

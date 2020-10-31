@@ -3,7 +3,7 @@ const Feedback = require('../models/feedback');
 const router = new express.Router();
 
 // Getting all feedbacks
-router.get('', async (req, res) => {
+router.get('/api/get-feedbacks', async (req, res) => {
     try {
         var feedbacks = await Feedback.find();
         res.send(feedbacks);
@@ -13,7 +13,7 @@ router.get('', async (req, res) => {
 });
 
 // New feedback
-router.post('', async (req, res) => {
+router.post('/api/create-feedback', async (req, res) => {
     const feedback = new Feedback(req.body);
     try {
         await feedback.save();
