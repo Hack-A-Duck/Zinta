@@ -17,7 +17,7 @@ router.post('/api/create-feedback', async (req, res) => {
     const feedback = new Feedback(req.body);
     try {
         await feedback.save();
-        res.status(201).send({feedback});
+        res.status(201);
     } catch (e) {
         res.status(400).send(e);
     }

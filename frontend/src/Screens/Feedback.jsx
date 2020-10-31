@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, FormGroup, Label, Input, CustomInput } from "reactstrap";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import FooterDown from "../components/FooterDown";
@@ -16,7 +16,91 @@ function Feedback() {
 		</button>
 	);
 
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [message, setMessage] = useState("");
 	const [rating, setRating] = useState(0);
+	const [presentation, setPresentation] = useState(false);
+	const [content, setContent] = useState(false);
+	const [linguistics, setLinguistics] = useState(false);
+	const [accuracy, setAccuracy] = useState(false);
+	const [none, setNone] = useState(false);
+
+	const [modalBody, setModalBody] = useState("Please fill in all the fields");
+	const [modalHead, setModalHead] = useState("Error");
+
+	useEffect(() => {
+		return updateModalContent();
+	}, [name, email, modalHead, modalBody]);
+
+	const updateModalContent = () => {
+
+		if(name.trim().length === 0) {
+			setModalHead("Error");
+			setModalBody("Please enter your name");
+		}
+
+		if(email.trim().length === 0) {
+			setModalHead("Error");
+			setModalBody("Please enter your email");
+		}
+	}
+
+	const resetAllStates = () => {
+		setName("");
+		setEmail("");
+		setMessage("");
+		setRating(0);
+		setPresentation(false);
+		setContent(false);
+		setLinguistics(false);
+		setAccuracy(false);
+		setNone(false);
+	}
+
+	const submitHandler = () => {
+
+		if(name.trim().length === 0) {
+			return toggle();
+		}
+
+		if(email.trim().length === 0) {
+			return toggle();
+		}
+
+		setModalHead("Thank You!");
+		setModalBody("We've received your feedback and your suggestions would be taken into consideration for a better experience!");
+
+		const checkboxes = [];
+
+		if(presentation) checkboxes.push("Presentation");
+		if(content) checkboxes.push("Content");
+		if(linguistics) checkboxes.push("Linguistics");
+		if(accuracy) checkboxes.push("Accuracy");
+		if(none) checkboxes.push("None");
+
+		const data = {
+			name: name,
+			email: email,
+			message: message | "No Message",
+			rating: rating | 0,
+			checkbox: checkboxes | []
+		};
+
+		fetch("http://localhost:5000/api/create-feedback", {
+      		method: "POST",
+      		headers: {
+				Accept: "application/json",
+				"Content-type": "application/json",
+			},
+      		body: JSON.stringify(data),
+    	})
+      		.then((res) => res.json())
+      		.then((data) => {});
+
+		toggle();
+		resetAllStates();
+	}
 
 	//handleSubmit()
 	return (
@@ -28,66 +112,71 @@ function Feedback() {
 				<h2>YOUR OPINION MATTERS</h2>
 				<Form>
 					<FormGroup>
-						<Label for="exampleEmail">Name</Label>
+						<Label>Name</Label>
 						<Input
 							type="name"
-							name="name"
-							id="exampleName"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
 							placeholder="Type here..."
 						/>
 					</FormGroup>
 					<FormGroup>
-						<Label for="exampleEmail">Email</Label>
+						<Label>Email</Label>
 						<Input
 							type="email"
-							name="email"
-							id="exampleEmail"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							placeholder="Type here..."
 						/>
 					</FormGroup>
 					<FormGroup>
-						<Label for="exampleCheckbox">
+						<Label>
 							Things you find attractive about this blog?
 						</Label>
 						<div>
 							<CustomInput
 								type="switch"
-								id="exampleCustomSwitch1"
-								name="customSwitch"
+								id="presentation"
 								label="Presentation"
+								value={presentation}
+								onChange={(e) => setPresentation(e.target.checked)}
 							/>
 							<CustomInput
 								type="switch"
-								id="exampleCustomSwitch2"
-								name="customSwitch"
+								id="content"
+								value={content}
+								onChange={(e) => setContent(e.target.checked)}
 								label="Content"
 							/>
 							<CustomInput
 								type="switch"
-								id="exampleCustomSwitch3"
+								id="linguistics"
+								value={linguistics}
+								onChange={e => setLinguistics(e.target.checked)}
 								label="Linguistics"
-								name="customSwitch"
 							/>
 							<CustomInput
 								type="switch"
-								id="exampleCustomSwitch4"
+								id="accuracy"
+								value={accuracy}
+								onChange={e => setAccuracy(e.target.checked)}
 								label="Accuracy Of Facts"
-								name="customSwitch"
 							/>
 							<CustomInput
 								type="switch"
-								id="exampleCustomSwitch5"
-								name="customSwitch"
+								id="none"
+								value={none}
+								onChange={e => setNone(e.target.checked)}
 								label="None"
 							/>
 						</div>
 					</FormGroup>
 
 					<FormGroup>
-						<Label for="exampleText">
+						<Label>
 							What else do you expect from the author?
 						</Label>
-						<Input type="textarea" name="text" id="exampleText" />
+						<Input value={message} onChange={(e) => setMessage(e.target.value)} type="textarea" />
 					</FormGroup>
 
 					<FormGroup style={{display: "flex", flexDirection: "column"}}>
@@ -104,16 +193,16 @@ function Feedback() {
 
 					</FormGroup>
 
-					<Button color="success" onClick={toggle}>
+					<Button color="success" onClick={submitHandler}>
 						Submit
 					</Button>
+
 					<Modal isOpen={modal} toggle={toggle}>
 						<ModalHeader toggle={toggle} close={closeBtn}>
-							THANK YOU!
+							{modalHead}
 						</ModalHeader>
 						<ModalBody>
-							We've received your feedback and your suggestions would be taken
-							into consideration for a better experience!
+							{modalBody}
 						</ModalBody>
 						<ModalFooter>
 							<Button color="primary" onClick={toggle}>

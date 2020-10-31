@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import DataTable from "react-data-table-component";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import "./FeedbackAdmin.css";
 
 const FeedbackAdmin = () => {
-	const feedbackData = [
+	const feedbackData1 = [
 		{
 			name: "A",
 			email: "asd@s.com",
@@ -40,6 +40,17 @@ const FeedbackAdmin = () => {
 		},
 	];
 
+	// const feedbackData = [];
+	const [feedbackData, setFeedbackData] = useState([]);
+	
+	fetch("http://localhost:5000/api/get-feedbacks", {
+		method: 'GET'
+	}).then(res => {
+		return res.json();
+	}).then((data) => {
+		setFeedbackData(data);
+	})
+
 	const columns = [
 		{
 			name: "Name",
@@ -52,7 +63,7 @@ const FeedbackAdmin = () => {
 		},
 		{
 			name: "CheckBox",
-			selector: "checkBox",
+			selector: "checkbox",
 		},
 		{
 			name: "Rating",
