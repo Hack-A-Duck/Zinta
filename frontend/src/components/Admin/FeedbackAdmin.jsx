@@ -2,7 +2,9 @@ import React from "react";
 import DataTable from "react-data-table-component";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import "./FeedbackAdmin.css";
+
 const FeedbackAdmin = () => {
+
 	const feedbackData = [
 		{
 			name: "A",
@@ -10,6 +12,7 @@ const FeedbackAdmin = () => {
 			checkBox: ["presentation", "content"],
 			message: "this is message",
 			rating: "5",
+			date: "1",
 		},
 		{
 			name: "B",
@@ -17,6 +20,7 @@ const FeedbackAdmin = () => {
 			checkBox: ["Linguistics", "content"],
 			message: "this is message",
 			rating: "3",
+			date: "1",
 		},
 		{
 			name: "C",
@@ -25,6 +29,7 @@ const FeedbackAdmin = () => {
 			message:
 				"this is message Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa quibusdam dolores similique cumque, corporis accusantium at recusandae officiis placeat eius, deleniti ipsa neque inventore enim optio libero, ipsum deserunt corrupti.",
 			rating: "1",
+			date: "1",
 		},
 		{
 			name: "D",
@@ -32,6 +37,7 @@ const FeedbackAdmin = () => {
 			checkBox: ["none"],
 			message: "this is message ",
 			rating: "4",
+			date: "1",
 		},
 	];
 
@@ -54,23 +60,36 @@ const FeedbackAdmin = () => {
 			selector: "rating",
 			sortable: true,
 		},
+		{
+			name: "Date",
+			selector: "date",
+			sortable: true,
+		}
 	];
+
 	const ExpandableContent = ({ data }) => (
-		<div className="data__message">{data.message}</div>
+		<div style={{backgroundColor: "#aaa"}} className="data__message">{data.message}</div>
 	);
+
 	const sortIcon = <ArrowDropDownIcon />;
+
 	return (
+
 		<div>
 			<DataTable
 				title="FEEDBACK TABLE"
 				columns={columns}
 				data={feedbackData}
 				sortIcon={sortIcon}
+				highlightOnHover
 				expandableRows
+				pagination
+				paginationPerPage={10}
 				expandableRowDisabled={(row) => row.disabled}
 				expandableRowsComponent={<ExpandableContent />}
 			/>
 		</div>
+
 	);
 };
 
