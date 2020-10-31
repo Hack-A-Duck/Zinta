@@ -1,0 +1,20 @@
+.rdt_Table {
+	padding: 20px !important;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.rdt_TableRow:nth-child(even) {
+	background-color: rgb(243, 255, 255) !important;
+}
+.rdt_TableHeadRow {
+	background-color: rgb(243, 255, 249) !important;
+}
+.rdt_TableCol {
+	font-size: 22px !important;
+	color: rgb(93, 93, 93) !important;
+	text-transform: uppercase !important;
+}
+.data__message {
+	padding: 10px;
+	margin-left: 50px;
+}
