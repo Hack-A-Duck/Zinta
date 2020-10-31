@@ -86,10 +86,14 @@ function Feedback() {
 					</FormGroup>
 
 					<FormGroup>
-						<Label for="exampleRange">
-							Till what extent are you satisfied with this blog?
-						</Label>
-						<Input type="range" name="range" id="exampleRange" />
+						<Label for="exampleSelect">Out of 5, please rate the blog ⭐</Label>
+						<Input type="select" name="select" id="exampleSelect">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</Input>
 					</FormGroup>
 
 					<Button color="success" onClick={toggle}>

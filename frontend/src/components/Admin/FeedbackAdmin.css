@@ -1,0 +1,10 @@
+.rdt_Table {
+	padding: 20px !important;
+}
+.rdt_TableRow:nth-child(even) {
+	background-color: rgb(243, 255, 255) !important;
+}
+.data__message {
+	padding: 10px;
+	margin-left: 50px;
+}
