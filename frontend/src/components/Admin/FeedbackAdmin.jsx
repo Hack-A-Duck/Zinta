@@ -4,7 +4,6 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import "./FeedbackAdmin.css";
 
 const FeedbackAdmin = () => {
-
 	const feedbackData = [
 		{
 			name: "A",
@@ -20,7 +19,7 @@ const FeedbackAdmin = () => {
 			checkBox: ["Linguistics", "content"],
 			message: "this is message",
 			rating: "3",
-			date: "1",
+			date: "5",
 		},
 		{
 			name: "C",
@@ -29,7 +28,7 @@ const FeedbackAdmin = () => {
 			message:
 				"this is message Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa quibusdam dolores similique cumque, corporis accusantium at recusandae officiis placeat eius, deleniti ipsa neque inventore enim optio libero, ipsum deserunt corrupti.",
 			rating: "1",
-			date: "1",
+			date: "4",
 		},
 		{
 			name: "D",
@@ -37,7 +36,7 @@ const FeedbackAdmin = () => {
 			checkBox: ["none"],
 			message: "this is message ",
 			rating: "4",
-			date: "1",
+			date: "3",
 		},
 	];
 
@@ -64,17 +63,18 @@ const FeedbackAdmin = () => {
 			name: "Date",
 			selector: "date",
 			sortable: true,
-		}
+		},
 	];
 
 	const ExpandableContent = ({ data }) => (
-		<div style={{backgroundColor: "#aaa"}} className="data__message">{data.message}</div>
+		<div style={{ backgroundColor: "#aaa" }} className="data__message">
+			{data.message}
+		</div>
 	);
 
 	const sortIcon = <ArrowDropDownIcon />;
 
 	return (
-
 		<div>
 			<DataTable
 				title="FEEDBACK TABLE"
@@ -89,7 +89,6 @@ const FeedbackAdmin = () => {
 				expandableRowsComponent={<ExpandableContent />}
 			/>
 		</div>
-
 	);
 };
 

@@ -122,7 +122,7 @@ const HomeBody = (props) => {
         layout={layout}
         cols={12}
         rowHeight={30}
-        width={1320}
+        width={window.screen.width}
       >
         {layout.map((current) => {
           // console.log(current);
