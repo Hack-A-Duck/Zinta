@@ -31,7 +31,7 @@ function Feedback() {
 
 	useEffect(() => {
 		return updateModalContent();
-	}, [name, email, modalHead, modalBody]);
+	}, [name, email]);
 
 	const updateModalContent = () => {
 
