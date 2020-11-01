@@ -38,11 +38,14 @@ function Feedback() {
 		if(name.trim().length === 0) {
 			setModalHead("Error");
 			setModalBody("Please enter your name");
-		}
-
-		if(email.trim().length === 0) {
+		} 
+		else if(email.trim().length === 0) {
 			setModalHead("Error");
 			setModalBody("Please enter your email");
+		} 
+		else {
+			setModalHead("Thank You!");
+			setModalBody("We've received your feedback and your suggestions would be taken into consideration for a better experience!");
 		}
 	}
 
