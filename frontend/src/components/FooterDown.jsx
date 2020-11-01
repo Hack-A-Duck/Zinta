@@ -3,9 +3,7 @@ import "../components/FooterDown.css";
 import fire from "../components/firebase";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import Login from "./Login";
-import Admin from "../Screens/Admin";
-import { Link, Redirect } from "react-router-dom";
+import Login from "./Login";;
 
 function FooterDown() {
 	const [modal, setModal] = useState(false);
@@ -17,7 +15,7 @@ function FooterDown() {
 			&times;
 		</button>
 	);
-	const [user, setUser] = useState({});
+
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
@@ -50,12 +48,9 @@ function FooterDown() {
 					case "auth/wrong-password":
 						setPasswordError(err.message);
 						break;
+					default: {}
 				}
 			});
-	};
-
-	const handleLogOut = () => {
-		fire.auth().signOut();
 	};
 
 	const authListener = () => {
@@ -131,14 +126,6 @@ function FooterDown() {
 					LOGIN
 				</ModalHeader>
 				<ModalBody>
-					{user ? (
-						<>
-							{/* <Admin handleLogOut={handleLogOut} /> */}
-							{/* <Redirect to={`/admin/`} /> */}
-						</>
-					) : (
-						<></>
-					)}
 
 					<Login
 						email={email}

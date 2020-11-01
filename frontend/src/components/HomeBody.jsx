@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./HomeBody.css";
 import { Resizable } from "re-resizable";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -131,7 +131,7 @@ const HomeBody = (props) => {
               <div className="blog__body">
                 <div className="blog__left">
                   <div className="blog__image">
-                    <img src={current.image} alt="Blog Image" />
+                    <img src={current.image} alt="Blog" />
                   </div>
                 </div>
                 <div className="blog__right">

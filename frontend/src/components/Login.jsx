@@ -10,8 +10,8 @@ function Login({
 	passwordError,
 }) {
 	return (
-		<div>
-			<label htmlFor="">Email</label>
+		<div style={{display: "flex", flexDirection: "column"}}>
+			<label>Email</label>
 			<input
 				type="email"
 				autoFocus
