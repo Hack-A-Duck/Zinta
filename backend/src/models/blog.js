@@ -8,7 +8,6 @@ const blogSchema = new mongoose.Schema({
     },
     body: {
         type: String,
-        required: true,
         trim: true
     },
     thumbnail: {
@@ -19,7 +18,7 @@ const blogSchema = new mongoose.Schema({
     }],
     visibility: {
         type: Boolean,
-        default: true
+        default: false
     }
 });
 

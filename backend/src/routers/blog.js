@@ -17,9 +17,9 @@ router.post('/api/create-blog', async (req, res) => {
     const blog = new Blog(req.body);
     try {
         await blog.save();
-        res.status(201).send({blog});
+        res.status(201).send({status: "201"});
     } catch (e) {
-        res.status(400).send(e);
+        res.status(400).send({status: "400", error: "e"});
     }
 });
 
