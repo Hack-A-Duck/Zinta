@@ -5,6 +5,7 @@ import NavbarAdmin from "../components/NavbarAdmin";
 import BlogsAdmin from "../components/Admin/BlogsAdmin";
 import FeedbackAdmin from "../components/Admin/FeedbackAdmin";
 import LayoutAdmin from "../components/Admin/LayoutAdmin";
+import CreateBlogAdmin from "../components/Admin/CreateBlogAdmin";
 
 function Admin() {
   useEffect(() => {
@@ -17,6 +18,7 @@ function Admin() {
   const _layoutComponent = 0;
   const _blogsComponent = 1;
   const _feedbackComponent = 2;
+  const _createBlogComponent = 3;
 
   const [currentComponent, setCurrentComponent] = useState(_layoutComponent);
 
@@ -32,6 +34,14 @@ function Admin() {
     setCurrentComponent(_feedbackComponent);
   };
 
+  const gotoCreate = () => {
+    setCurrentComponent(_createBlogComponent);
+  }
+
+  const gotoBack = () => {
+    setCurrentComponent(_blogsComponent);
+  }
+
   return (
     <div className="admin">
       <NavbarAdmin
@@ -41,8 +51,9 @@ function Admin() {
       />
 
       {currentComponent === _layoutComponent ? <LayoutAdmin /> : null}
-      {currentComponent === _blogsComponent ? <BlogsAdmin /> : null}
+      {currentComponent === _blogsComponent ? <BlogsAdmin gotoCreate={gotoCreate} /> : null}
       {currentComponent === _feedbackComponent ? <FeedbackAdmin /> : null}
+      {currentComponent === _createBlogComponent ? <CreateBlogAdmin gotoBack={gotoBack} /> : null}
     </div>
   );
 }
