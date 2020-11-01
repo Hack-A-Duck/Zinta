@@ -1,10 +1,15 @@
 import { Button } from "reactstrap";
+
+import React from "react";
+import { Link } from "react-router-dom";
+
 import React, { useState, useEffect } from "react";
+
 import DataTable from "react-data-table-component";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 
-const BlogsAdmin = () => {
+const BlogsAdmin = (props) => {
   const sortIcon = <ArrowDropDownIcon />;
 
   const [blogsData, setBlogsData] = useState([]);
@@ -44,8 +49,10 @@ const BlogsAdmin = () => {
       <div
         style={{ display: "flex", justifyContent: "right", marginRight: "5vw" }}
       >
-        <Button color="success">
-          <ControlPointIcon /> Add New Blog
+        <Button color="success" onClick={() => props.gotoCreate()}>
+          {/* <Link style={{textDecoration: "none"}} to="/admin/create-new-blog" > */}
+            <ControlPointIcon /> Add New Blog
+          {/* </Link> */}
         </Button>
       </div>
 
