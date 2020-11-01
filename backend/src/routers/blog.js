@@ -80,8 +80,8 @@ router.post('/api/add-comment', async (req, res) => {
 // Updating blog
 router.patch('/api/update-blog', async (req, res) => {
     try {
-        var blog = await Blog.findByIdAndUpdate(req.params.id, req.body);
-        res.status(200).send({blog});
+        await Blog.findByIdAndUpdate(req.body.id, req.body);
+        res.status(200);
     } catch (e) {
         res.status(400).send(e);
     }

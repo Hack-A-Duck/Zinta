@@ -62,7 +62,10 @@ const BlogsAdmin = (props) => {
           pointerOnHover
           pagination
           paginationPerPage={10}
-          onRowClicked={() => {}}
+          onRowClicked={(e) => {
+            props.setEditBlogInfo(e);
+            props.gotoEdit();
+          } }
         />
       </div>
     </div>

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { Button, Input } from "reactstrap";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, { useState } from 'react'
+import { Button, Input } from 'reactstrap';
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import DoneSharpIcon from "@material-ui/icons/DoneSharp";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-const CreateBlogAdmin = (props) => {
-	const formats = [
+const EditBlogAdmin = (props) => {
+    
+    const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
+    const [blogBody, setBlogBody] = useState(props.blogInfo.body);
+
+    const formats = [
 		"header",
 		"bold",
 		"italic",
@@ -18,9 +22,9 @@ const CreateBlogAdmin = (props) => {
 		"indent",
 		"link",
 		"image",
-	];
-
-	const modules = {
+    ];
+    
+    const modules = {
 		toolbar: [
 			[{ header: [1, 2, 3, 4, 5, false] }],
 			[{ font: [] }],
@@ -36,47 +40,47 @@ const CreateBlogAdmin = (props) => {
 			["link", "image"],
 			["clean"],
 		],
-	};
-
-	const [blogTitle, setBlogTitle] = useState("");
-	const [blogBody, setBlogBody] = useState("");
-
-	const createBlogHandler = () => {
-		if (blogTitle.trim().length === 0) {
+    };
+    
+    const updateBlogHandler = () => {
+        if (blogTitle.trim().length === 0) {
 			return window.alert("Title cannot be empty!!");
 		} else {
-			const newBlogData = {
+			const updatedBlogData = {
 				title: blogTitle,
-				body: blogBody,
-			};
+                body: blogBody,
+                id: props.blogInfo._id,
+                date: Date.now(),
+            };
+            
+            // console.log(updatedBlogData);
 
-			// console.log(newBlogData);
-
-			fetch("http://localhost:5000/api/create-blog", {
-				method: "POST",
+			fetch("http://localhost:5000/api/update-blog", {
+				method: "PATCH",
 				headers: {
-					Accept: "application/json",
+					"Accept": "application/json",
 					"Content-type": "application/json",
 				},
-				body: JSON.stringify(newBlogData),
+				body: JSON.stringify(updatedBlogData),
 			})
 				.then((res) => {
 					return res.json();
 				})
 				.then((data) => {
+                    console.log(data);
 					if (data.status === "400") {
 						return window.alert("Some error occured!" + data.error);
 					} else {
-						window.alert("Blog created successfully!!");
+						window.alert("Blog updated successfully!!");
 						return props.gotoBack();
 					}
 				});
 		}
-	};
+    }
 
-	return (
-		<div>
-			<div>
+    return (
+        <div>
+            <div>
 				<Button
 					color="danger"
 					onClick={() => props.gotoBack()}
@@ -120,10 +124,9 @@ const CreateBlogAdmin = (props) => {
 				<ReactQuill
 					theme="snow"
 					modules={modules}
-					formats={formats}
+                    formats={formats}
+                    defaultValue={blogBody}
 					onChange={(e) => setBlogBody(e)}
-					//   value={blogBody}
-					//   onChange={e => setBlogBody(e.target.value)}
 					style={{
 						width: "95%",
 						textAlign: "left",
@@ -137,17 +140,14 @@ const CreateBlogAdmin = (props) => {
 						type="success"
 						color="primary"
 						style={{ margin: "15px" }}
-						onClick={createBlogHandler}
+						onClick={updateBlogHandler}
 					>
-						Create Blog
-						<DoneSharpIcon />
-					</Button>
+						<DoneSharpIcon /> Save Changes
+                    </Button>
 				</div>
 			</div>
-		</div>
-	);
-};
+        </div>
+    )
+}
 
-export default CreateBlogAdmin;
-
-//title body
+export default EditBlogAdmin

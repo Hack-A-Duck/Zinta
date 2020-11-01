@@ -6,6 +6,7 @@ import BlogsAdmin from "../components/Admin/BlogsAdmin";
 import FeedbackAdmin from "../components/Admin/FeedbackAdmin";
 import LayoutAdmin from "../components/Admin/LayoutAdmin";
 import CreateBlogAdmin from "../components/Admin/CreateBlogAdmin";
+import EditBlogAdmin from "../components/Admin/EditBlogAdmin";
 
 function Admin() {
   useEffect(() => {
@@ -19,8 +20,10 @@ function Admin() {
   const _blogsComponent = 1;
   const _feedbackComponent = 2;
   const _createBlogComponent = 3;
+  const _editBlogComponent = 4;
 
   const [currentComponent, setCurrentComponent] = useState(_layoutComponent);
+  const [editBlogInfo, setEditBlogInfo] = useState({});
 
   const gotoLayout = () => {
     setCurrentComponent(_layoutComponent);
@@ -38,8 +41,8 @@ function Admin() {
     setCurrentComponent(_createBlogComponent);
   }
 
-  const gotoBack = () => {
-    setCurrentComponent(_blogsComponent);
+  const gotoEdit = () => {
+    setCurrentComponent(_editBlogComponent);
   }
 
   return (
@@ -51,9 +54,10 @@ function Admin() {
       />
 
       {currentComponent === _layoutComponent ? <LayoutAdmin /> : null}
-      {currentComponent === _blogsComponent ? <BlogsAdmin gotoCreate={gotoCreate} /> : null}
+      {currentComponent === _blogsComponent ? <BlogsAdmin gotoCreate={gotoCreate} gotoEdit={gotoEdit} setEditBlogInfo={setEditBlogInfo} /> : null}
       {currentComponent === _feedbackComponent ? <FeedbackAdmin /> : null}
-      {currentComponent === _createBlogComponent ? <CreateBlogAdmin gotoBack={gotoBack} /> : null}
+      {currentComponent === _createBlogComponent ? <CreateBlogAdmin gotoBack={gotoFeedback} /> : null}
+      {currentComponent === _editBlogComponent ? <EditBlogAdmin gotoBack={gotoBlogs} blogInfo={editBlogInfo} /> : null}
     </div>
   );
 }
