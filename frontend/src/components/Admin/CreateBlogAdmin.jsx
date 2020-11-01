@@ -128,8 +128,8 @@ const CreateBlogAdmin = (props) => {
         <ReactQuill
           theme="snow"
           modules={modules}
-		  formats={formats}
-		  onChange={e => setBlogBody(e)}
+		      formats={formats}
+		      onChange={e => setBlogBody(e)}
 		//   value={blogBody}
 		//   onChange={e => setBlogBody(e.target.value)}
           style={{
@@ -144,8 +144,8 @@ const CreateBlogAdmin = (props) => {
           <Button
             type="success"
             color="primary"
-			style={{ margin: "15px", display: "flex", width: "9vw" }}
-			onClick={createBlogHandler}
+			      style={{ margin: "15px", display: "flex", width: "9vw" }}
+			      onClick={createBlogHandler}
           >
             Create Blog
             <DoneSharpIcon />

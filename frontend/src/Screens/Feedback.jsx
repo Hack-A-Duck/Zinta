@@ -36,14 +36,17 @@ function Feedback() {
 	const updateModalContent = () => {
 
 		if(name.trim().length === 0) {
+			// console.log("Empty name error")
 			setModalHead("Error");
 			setModalBody("Please enter your name");
 		} 
 		else if(email.trim().length === 0) {
+			console.log("Empty email error")
 			setModalHead("Error");
 			setModalBody("Please enter your email");
 		} 
-		else {
+		else if(name.trim().length !==0 && email.trim().length !== 0) {
+			console.log("none empty message")
 			setModalHead("Thank You!");
 			setModalBody("We've received your feedback and your suggestions would be taken into consideration for a better experience!");
 		}
@@ -70,9 +73,6 @@ function Feedback() {
 		if(email.trim().length === 0) {
 			return toggle();
 		}
-
-		setModalHead("Thank You!");
-		setModalBody("We've received your feedback and your suggestions would be taken into consideration for a better experience!");
 
 		const checkboxes = [];
 
@@ -102,7 +102,8 @@ function Feedback() {
       		.then((data) => {});
 
 		toggle();
-		resetAllStates();
+		// setTimeout(() => resetAllStates(), 1000);
+		// resetAllStates();
 	}
 
 	//handleSubmit()
