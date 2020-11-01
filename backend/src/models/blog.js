@@ -17,8 +17,12 @@ const blogSchema = new mongoose.Schema({
         type: String
     }],
     visibility: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: "false"
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

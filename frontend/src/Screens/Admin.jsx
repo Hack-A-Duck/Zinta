@@ -20,7 +20,7 @@ function Admin() {
   const _feedbackComponent = 2;
   const _createBlogComponent = 3;
 
-  const [currentComponent, setCurrentComponent] = useState(_createBlogComponent);
+  const [currentComponent, setCurrentComponent] = useState(_layoutComponent);
 
   const gotoLayout = () => {
     setCurrentComponent(_layoutComponent);
