@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect } from "react";
+import { Button } from "reactstrap";
 import DataTable from "react-data-table-component";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import DeleteIcon from '@material-ui/icons/Delete';
 import "./FeedbackAdmin.css";
 
 const FeedbackAdmin = () => {
 	
 	const [feedbackData, setFeedbackData] = useState([]);
+	const [deleteFeedbackId, setDeleteFeedbackId] = useState("");
 
 	useEffect(() => {
 		fetch("http://localhost:5000/api/get-feedbacks", {
@@ -13,10 +16,47 @@ const FeedbackAdmin = () => {
 		}).then(res => {
 			return res.json();
 		}).then((data) => {
-			console.log(data);
+			// console.log(data);
 			setFeedbackData(data);
 		})
-	}, []);
+	}, [deleteFeedbackId]);
+
+	useEffect(() => {
+		if(deleteFeedbackId.length === 0) {
+			return;
+		}
+
+		const data = {
+			_id: deleteFeedbackId
+		};
+
+		setDeleteFeedbackId("");
+
+		fetch("http://localhost:5000/api/delete-feedback", {
+			method: "DELETE",
+			headers: {
+				"Content-type": "application/json",
+				"Accept": "application/json"
+			},
+			body: JSON.stringify(data)
+		}).then((res) => {
+			return res.json();
+		}).then((data) => {
+
+			console.log("delete successful");
+
+			fetch("http://localhost:5000/api/get-feedbacks", {
+				method: 'GET'
+			}).then(res => {
+				return res.json();
+			}).then((newData) => {
+				console.log("fetching info again")
+				setFeedbackData(newData);
+			})
+
+		});
+
+	},[deleteFeedbackId]);
 
 	const columns = [
 		{
@@ -45,10 +85,17 @@ const FeedbackAdmin = () => {
 	];
 
 	const ExpandableContent = ({ data }) => (
-		<div style={{ backgroundColor: "#aaa" }} className="data__message">
-			{data.message}
-		</div>
-	);
+    <>
+      <div style={{ backgroundColor: "#aaa" }} className="data__message">
+        {data.message}
+      </div>
+      <div>
+        <Button color="danger" onClick={() => setDeleteFeedbackId(data._id)}>
+          <DeleteIcon />Delete Feedback
+        </Button>
+      </div>
+    </>
+  );
 
 	const sortIcon = <ArrowDropDownIcon />;
 

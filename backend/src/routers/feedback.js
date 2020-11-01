@@ -23,4 +23,17 @@ router.post('/api/create-feedback', async (req, res) => {
     }
 });
 
+//Delete feedback
+router.delete('/api/delete-feedback', async (req, res) => {
+    const feedback = await Feedback.findByIdAndDelete(req.body._id);
+    try {
+        if(!feedback)
+            return res.status(404);
+
+        res.status(200);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+})
+
 module.exports = router;
