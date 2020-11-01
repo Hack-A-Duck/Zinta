@@ -1,6 +1,5 @@
-import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { Button } from "reactstrap";
 
 import DataTable from "react-data-table-component";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -18,7 +17,6 @@ const BlogsAdmin = (props) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       setBlogsData(data);
     });
 
