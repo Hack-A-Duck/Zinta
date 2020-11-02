@@ -11,6 +11,7 @@ In terminal 2,
 3. npm run dev
 
 Shortcut
+
 cd frontend && npm i && npm start
 
 cd backend && npm i && npm run dev
