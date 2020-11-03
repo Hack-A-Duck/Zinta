@@ -50,7 +50,6 @@ const EditBlogAdmin = (props) => {
 				title: blogTitle,
                 body: blogBody,
                 id: props.blogInfo._id,
-                date: Date.now(),
             };
             
             // console.log(updatedBlogData);
