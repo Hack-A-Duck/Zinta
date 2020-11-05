@@ -84,7 +84,7 @@ const LayoutAdmin = () => {
 			</Button>
 
 			<GridLayout
-				onLayoutChange={(current) => setBlogLayout(current)}
+				onLayoutChange={layoutChangeHandler}
 				className="layout"
 				layout={blogLayout}
 				cols={12}
