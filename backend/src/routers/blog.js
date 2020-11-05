@@ -16,11 +16,22 @@ router.get('/api/get-blogs', async (req, res) => {
 router.get('/api/get-visible-blogs', async (req, res) => {
     try {
         var blogs = await Blog.find({visibility: "true"});
-        res.send(blogs);
+        res.status(200).send(blogs);
+
     } catch (e) {
         res.status(400).send(e);
     }
 });
+
+//Getting blog by id
+router.get('/api/get-blog/:id', async (req, res) => {
+    try {
+        var blog = await Blog.find({_id: req.params.id});
+        res.status(200).send(blog);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+})
 
 // Saving updated layout
 router.patch('/api/save-layout', async (req, res) => {
