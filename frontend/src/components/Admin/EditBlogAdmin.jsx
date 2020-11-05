@@ -8,7 +8,16 @@ import "react-quill/dist/quill.snow.css";
 const EditBlogAdmin = (props) => {
     
     const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
-    const [blogBody, setBlogBody] = useState(props.blogInfo.body);
+	const [blogBody, setBlogBody] = useState(props.blogInfo.body);
+	const [visibility, setVisibility] = useState(props.blogInfo.visibility);
+
+	const toggleVisibility = () => {
+		if(visibility === "true") {
+			setVisibility("false");
+		} else {
+			setVisibility("true");
+		}
+	}
 
     const formats = [
 		"header",
@@ -49,7 +58,8 @@ const EditBlogAdmin = (props) => {
 			const updatedBlogData = {
 				title: blogTitle,
                 body: blogBody,
-                id: props.blogInfo._id,
+				id: props.blogInfo._id,
+				visibility: visibility,
             };
             
             // console.log(updatedBlogData);
@@ -78,75 +88,91 @@ const EditBlogAdmin = (props) => {
     }
 
     return (
+      <div>
         <div>
-            <div>
-				<Button
-					color="danger"
-					onClick={() => props.gotoBack()}
-					style={{ marginLeft: "10px", marginBottom: "20px" }}
-				>
-					<ArrowBackIosIcon /> Back
-				</Button>
-			</div>
+          <Button
+            color="danger"
+            onClick={() => props.gotoBack()}
+            style={{ marginLeft: "10px", marginBottom: "20px" }}
+          >
+            <ArrowBackIosIcon /> Back
+          </Button>
 
-			<div
-				className="quill__writetitle"
-				style={{
-					display: "flex",
-					justifyContent: "left",
-					alignItems: "left",
-					flexDirection: "column",
-					padding: "10px",
-				}}
-			>
-				<h4>TITLE</h4>
-				<Input
-					placeholder="TItle of blog"
-					value={blogTitle}
-					onChange={(e) => setBlogTitle(e.target.value)}
-					style={{ width: "40vw" }}
-				/>
-			</div>
-
-			<hr />
-
-			<div
-				className="quill__writecontent"
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					padding: "10px",
-				}}
-			>
-				<h4 style={{ justifyContent: "left", alignItems: "left" }}>BODY</h4>
-
-				<ReactQuill
-					theme="snow"
-					modules={modules}
-                    formats={formats}
-                    defaultValue={blogBody}
-					onChange={(e) => setBlogBody(e)}
-					style={{
-						width: "95%",
-						textAlign: "left",
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				/>
-
-				<div style={{ display: "flex", justifyContent: "center" }}>
-					<Button
-						type="success"
-						color="primary"
-						style={{ margin: "15px" }}
-						onClick={updateBlogHandler}
-					>
-						<DoneSharpIcon /> Save Changes
-                    </Button>
-				</div>
-			</div>
+          <Button
+            style={{ marginLeft: "10px", marginBottom: "20px" }}
+            color="primary"
+            onClick={toggleVisibility}
+          >
+            {visibility === "true" ? (
+              <span>
+                <i className="ri-eye-line" /> Visible
+              </span>
+            ) : (
+              <span>
+                <i className="ri-eye-off-line" /> Not visible
+              </span>
+            )}
+          </Button>
         </div>
-    )
+
+        <div
+          className="quill__writetitle"
+          style={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "left",
+            flexDirection: "column",
+            padding: "10px",
+          }}
+        >
+          <h4>TITLE</h4>
+          <Input
+            placeholder="TItle of blog"
+            value={blogTitle}
+            onChange={(e) => setBlogTitle(e.target.value)}
+            style={{ width: "40vw" }}
+          />
+        </div>
+
+        <hr />
+
+        <div
+          className="quill__writecontent"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "10px",
+          }}
+        >
+          <h4 style={{ justifyContent: "left", alignItems: "left" }}>BODY</h4>
+
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            defaultValue={blogBody}
+            onChange={(e) => setBlogBody(e)}
+            style={{
+              width: "95%",
+              textAlign: "left",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          />
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              type="success"
+              color="primary"
+              style={{ margin: "15px" }}
+              onClick={updateBlogHandler}
+            >
+              <DoneSharpIcon /> Save Changes
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
 }
 
 export default EditBlogAdmin
