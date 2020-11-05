@@ -17,6 +17,7 @@ router.get('/api/get-visible-blogs', async (req, res) => {
     try {
         var blogs = await Blog.find({visibility: "true"});
         res.status(200).send(blogs);
+
     } catch (e) {
         res.status(400).send(e);
     }
