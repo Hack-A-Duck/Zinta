@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import GridLayout from "react-grid-layout";
-import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import "../HomeBody.css";;
 
