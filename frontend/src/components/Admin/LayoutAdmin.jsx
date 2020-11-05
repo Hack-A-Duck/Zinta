@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import GridLayout from "react-grid-layout";
-import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import "../HomeBody.css";;
 
@@ -23,6 +22,7 @@ const LayoutAdmin = () => {
 	}, []);
 
 	const saveLayoutHandler = () => {
+		// console.log("save this info", blogLayout);
 		fetch("http://localhost:5000/api/save-layout", {
 			method: "PATCH",
 			headers: {
@@ -41,6 +41,41 @@ const LayoutAdmin = () => {
 		})
 	}
 
+	const layoutChangeHandler = (currentLayout) => {
+		currentLayout.map(current => {
+			setBlogLayout(blogLayout.map(blog => {
+				if(blog.i !== current.i) {
+					return blog;
+				} else {
+					return {
+						...blog,
+						h: current.h,
+						w: current.w,
+						x: current.x,
+						y: current.y,
+					}
+				}
+			}))
+		})
+
+		// var updatedLayout = blogLayout;
+		// for(var i=0; i<currentLayout.length; ++i) {
+		// 	for(var j=0; j<updatedLayout.length; ++j) {
+		// 		if(currentLayout[i].i === updatedLayout[j].i) {
+		// 			var temp = {
+		// 				...updatedLayout[i],
+		// 				w: currentLayout[i].w,
+		// 				h: currentLayout[i].h,
+		// 				x: currentLayout[i].x,
+		// 				y: currentLayout[i].y,
+		// 			}
+		// 		}
+		// 	}
+		// }
+
+		// setBlogLayout(updatedLayout);
+	}
+
 	return (
 		<div>
 
@@ -49,7 +84,7 @@ const LayoutAdmin = () => {
 			</Button>
 
 			<GridLayout
-				onLayoutChange={(current) => setBlogLayout(current)}
+				onLayoutChange={layoutChangeHandler}
 				className="layout"
 				layout={blogLayout}
 				cols={12}
