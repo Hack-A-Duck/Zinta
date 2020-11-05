@@ -6,8 +6,7 @@ const feedbackRouter = require('./src/routers/feedback');
 connectDB();
 
 const app = express();
-// const port = process.env.PORT;
-const port = 5000;
+const port = process.env.PORT;
 app.use(express.json());
 app.use(blogRouter);
 app.use(feedbackRouter);

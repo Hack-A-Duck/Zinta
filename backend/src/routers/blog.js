@@ -15,12 +15,11 @@ router.get('/api/get-blogs', async (req, res) => {
 // Creating new blog
 router.post('/api/create-blog', async (req, res) => {
     var blog = new Blog(req.body);
+    if(Object.keys(req).indexOf("file") !== -1){
+        blog["thumbnail"] = req.file.buffer; 
+    }
     try {
         await blog.save();
-        var thumbnail = {
-            "thumbnail": req.file.buffer
-        }
-        blog = await Blog.findByIdAndUpdate(req.body.id, thumbnail);
         res.status(201).send({status: "201"});
     } catch (e) {
         res.status(400).send({status: "400", error: e});
@@ -79,8 +78,19 @@ router.post('/api/add-comment', async (req, res) => {
 
 // Updating blog
 router.patch('/api/update-blog', async (req, res) => {
+    var updateData = req.body
+    updateData["date"] = Date.now()
+    if(Object.keys(req).indexOf("file") !== -1){
+        blog["thumbnail"] = req.file.buffer; 
+    }
     try {
-        await Blog.findByIdAndUpdate(req.body.id, req.body);
+        const blog = await Blog.findById(req.body.id);
+        const previousVisibility = blog["visibility"]
+        if (updateData["visibility"] === "true" && previousVisibility === "false"){
+            const blogPosition = findNewPosition();
+            newData = {...newData, ...blogPosition};
+        }
+        await Blog.findByIdAndUpdate(req.body.id, updateData);
         res.status(200).send({status: "200"});
     } catch (e) {
         res.status(400).send({status: "400", error: e});
