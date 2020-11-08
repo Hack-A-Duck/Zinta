@@ -10,7 +10,7 @@ const FeedbackAdmin = () => {
 	const [deleteFeedbackId, setDeleteFeedbackId] = useState("");
 
 	useEffect(() => {
-		fetch("http://localhost:5000/api/get-feedbacks", {
+		fetch("/api/get-feedbacks", {
 			method: "GET",
 		})
 			.then((res) => {
