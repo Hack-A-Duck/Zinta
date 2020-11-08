@@ -4,6 +4,8 @@ const express = require('express');
 const blogRouter = require('./src/routers/blog');
 const feedbackRouter = require('./src/routers/feedback');
 const path = require('path');
+const cors = require('cors');
+
 connectDB();
 
 const app = express();
@@ -13,6 +15,7 @@ app.use(blogRouter);
 app.use(feedbackRouter);
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors());
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

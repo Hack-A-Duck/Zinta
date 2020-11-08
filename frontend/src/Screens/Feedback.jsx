@@ -90,8 +90,8 @@ function Feedback() {
 			checkbox: checkboxes | []
 		};
 
-		fetch("http://localhost:"+ (process.env.PORT || 5000) +"/api/create-feedback", {
-      		method: "POST",
+		fetch("/api/create-feedback", {
+			method: "POST",
       		headers: {
 				Accept: "application/json",
 				"Content-type": "application/json",
