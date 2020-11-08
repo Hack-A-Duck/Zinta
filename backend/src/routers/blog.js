@@ -83,7 +83,7 @@ async function findNewPosition(blogPosition) {
         return blogPosition;
     }
     for(blog in blogs){
-        blogPosition["y"] = max(blogPosition["y"], blog["y"] + blog["h"]);
+        blogPosition["y"] = Math.max(blogPosition["y"], blog["y"] + blog["h"]);
     }
     return blogPosition;
 }
@@ -132,7 +132,7 @@ router.patch('/api/update-blog', async (req, res) => {
         const previousVisibility = blog["visibility"]
         if (updateData["visibility"] === "true" && previousVisibility === "false"){
             const blogPosition = findNewPosition();
-            newData = {...newData, ...blogPosition};
+            updateData = {...updateData, ...blogPosition};
         }
         await Blog.findByIdAndUpdate(req.body.id, updateData);
         res.status(200).send({status: "200"});
