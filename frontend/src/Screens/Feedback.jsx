@@ -90,7 +90,7 @@ function Feedback() {
 			checkbox: checkboxes | []
 		};
 
-		fetch("http://localhost:5000/api/create-feedback", {
+		fetch("/api/create-feedback", {
       		method: "POST",
       		headers: {
 				Accept: "application/json",
