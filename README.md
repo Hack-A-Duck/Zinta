@@ -1,4 +1,6 @@
-For starting website, from inside "hack-a-blog" , open 2 terminals
+Link to the website - [https://hack-a-blog.herokuapp.com](https://hack-a-blog.herokuapp.com/)
+#
+For starting website locally, from inside "hack-a-blog" , open 2 terminals
 
 In terminal 1, 
 1. cd frontend
