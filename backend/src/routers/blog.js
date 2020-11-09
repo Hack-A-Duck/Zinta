@@ -111,7 +111,7 @@ router.patch('/api/toggle-visibility', async (req,res) => {
 // Adding comment
 router.post('/api/add-comment', async (req, res) => {
     var blog = await Blog.findById(req.body.id);
-    blog.comments.push(req.body.comment);
+    blog.comments.splice(0, 0, req.body.comment);
     try {
         await blog.save();
         res.status(201).send({blog});
