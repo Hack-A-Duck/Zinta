@@ -3,10 +3,12 @@ const connectDB = require('./src/db/mongoose');
 const express = require('express');
 const blogRouter = require('./src/routers/blog');
 const feedbackRouter = require('./src/routers/feedback');
+const cors = require('cors');
 connectDB();
 
 const app = express();
 const port = process.env.PORT;
+app.use(cors());
 app.use(express.json());
 app.use(blogRouter);
 app.use(feedbackRouter);

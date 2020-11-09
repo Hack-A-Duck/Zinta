@@ -141,6 +141,13 @@ router.patch('/api/update-blog', async (req, res) => {
     }
 });
 
+//Updating blog thumbnail
+router.post('/api/update-thumbnail', async (req, res) => {
+    console.log(Object.keys(req.body));
+    
+    res.send({status: "200"});
+})
+
 // Deleting blog
 router.delete('/api/delete-blog', async (req, res) => {
     const blog = await Blog.findByIdAndDelete(req.body.id);

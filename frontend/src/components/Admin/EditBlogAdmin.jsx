@@ -6,6 +6,8 @@ import ReactQuill from "react-quill";
 import DataTable from "react-data-table-component";
 import "react-quill/dist/quill.snow.css";
 
+const fileToArrayBuffer = require('file-to-array-buffer')
+
 const EditBlogAdmin = (props) => {
   const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
   const [blogBody, setBlogBody] = useState(props.blogInfo.body);
@@ -19,6 +21,39 @@ const EditBlogAdmin = (props) => {
   );
   const [counter, setCounter] = useState(0);
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const hiddenFileInput = React.useRef(null);
+  const handleUploadClick = (e) => hiddenFileInput.current.click();
+
+  const uploadImage = (event) => {
+    var fileUploaded = event.target.files[0];
+
+    console.log(event.target.files);
+
+    var fd = new FormData();
+    fd.append("thumbnail", fileUploaded);
+    for (var key of fd.entries()) {
+      console.log("this " + key[0] + ', ' + key[1]);
+  }
+    // console.log("initial", fd);
+    // fd["thumbnail"] = fileUploaded;
+    // fd.append( 
+    //   "thumbnail", 
+    //   uploadImage, 
+    //   uploadImage.name 
+    // ); 
+    // fd.append("something", "value");
+
+    console.log("fd", fd);
+    fetch("http://localhost:5000/api/update-thumbnail", {
+      method: "POST",
+      // headers:{
+      //   "Content-Type" : "multipart/form-data"
+      // },
+      body: fd,
+    }).then(res => res.json()).then(data => {
+      console.log(data);
+    });
+  };
 
   useEffect(() => {
     if (counter >= 5) {
@@ -158,14 +193,26 @@ const EditBlogAdmin = (props) => {
           )}
         </Button>
 
-          <Button
-            type="success"
-            color="primary"
-            style={{ marginLeft: "10px", marginBottom: "20px" }}
-            onClick={updateBlogHandler}
-          >
-            <DoneSharpIcon /> Save Changes
+        <Button
+          type="success"
+          color="primary"
+          style={{ marginLeft: "10px", marginBottom: "20px" }}
+          onClick={updateBlogHandler}
+        >
+          <DoneSharpIcon /> Save Changes
+        </Button>
+
+        <div>
+          <Button onClick={handleUploadClick} className="p-2" color="primary">
+            Upload
           </Button>
+          <input
+            ref={hiddenFileInput}
+            style={{ display: "none" }}
+            onChange={uploadImage}
+            type="file"
+          />
+        </div>
       </div>
 
       <div
