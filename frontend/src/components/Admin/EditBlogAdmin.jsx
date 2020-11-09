@@ -158,16 +158,14 @@ const EditBlogAdmin = (props) => {
           )}
         </Button>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
           <Button
             type="success"
             color="primary"
-            style={{ margin: "15px" }}
+            style={{ marginLeft: "10px", marginBottom: "20px" }}
             onClick={updateBlogHandler}
           >
             <DoneSharpIcon /> Save Changes
           </Button>
-        </div>
       </div>
 
       <div
@@ -225,13 +223,18 @@ const EditBlogAdmin = (props) => {
         />
       </div>
 
-        <Button onMouseEnter={() => setTooltipOpen(true)} onMouseLeave={() => setTooltipOpen(false)} color="danger" onClick={() => setCounter(counter + 1)}>
-          Delete Blog
-        </Button>
+      <Button
+        onMouseEnter={() => setTooltipOpen(true)}
+        onMouseLeave={() => setTooltipOpen(false)}
+        color="danger"
+        onClick={() => setCounter(counter + 1)}
+      >
+        Delete Blog
+      </Button>
 
-{tooltipOpen ? <p>Click {5-counter} more times to delete the blog</p> : null}
-        
-      
+      {tooltipOpen ? (
+        <p>Click {5 - counter} more times to delete the blog</p>
+      ) : null}
     </div>
   );
 };
