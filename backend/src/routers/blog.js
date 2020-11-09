@@ -114,9 +114,9 @@ router.post('/api/add-comment', async (req, res) => {
     blog.comments.push(req.body.comment);
     try {
         await blog.save();
-        res.status(201).send({blog});
+        res.status(201).send({status: "200"});
     } catch (e) {
-        res.status(400).send(e);
+        res.status(400).send({status: "400"});
     }
 });
 
