@@ -143,13 +143,13 @@ router.patch('/api/update-blog', async (req, res) => {
 
 // Deleting blog
 router.delete('/api/delete-blog', async (req, res) => {
-    const blog = await Blog.findByIdAndDelete(req.params.id);
+    const blog = await Blog.findByIdAndDelete(req.body.id);
     try {
         if(!blog)
-            return res.status(404).send();
-        res.send({blog});
+            return res.status(404).send({status: "404"});
+        res.send({status: "200"});
     } catch (e) {
-        res.status(500).send(e);
+        res.status(500).send({status: "400"});
     }
 });
 
