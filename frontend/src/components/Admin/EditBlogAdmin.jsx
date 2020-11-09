@@ -5,6 +5,7 @@ import DoneSharpIcon from "@material-ui/icons/DoneSharp";
 import ReactQuill from "react-quill";
 import DataTable from "react-data-table-component";
 import "react-quill/dist/quill.snow.css";
+import "./EditBlogAdmin.css";
 
 const EditBlogAdmin = (props) => {
   const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
