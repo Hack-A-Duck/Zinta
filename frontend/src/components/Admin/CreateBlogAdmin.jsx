@@ -4,6 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import DoneSharpIcon from "@material-ui/icons/DoneSharp";
+import "./CreateBlogAdmin.css";
 
 const CreateBlogAdmin = (props) => {
 	const formats = [
