@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import DataTable from "react-data-table-component";
 import { Input, Button } from 'reactstrap';
+import FooterDown from './FooterDown';
+import NavbarTop from './NavbarTop';
 
 const SingleBLog = (props) => {
     const [blogId, setBlogId] = useState(window.location.href.substr(window.location.href.lastIndexOf('/')+1));
@@ -81,6 +83,7 @@ const SingleBLog = (props) => {
 
     return (
         <div>
+            <NavbarTop />
             <h1>{blogTitle}</h1>
             {ReactHtmlParser(blogBody)}
             <div>
@@ -97,6 +100,7 @@ const SingleBLog = (props) => {
                     paginationPerPage={10}
                 />
             </div>
+            <FooterDown />
         </div>
     )
 }

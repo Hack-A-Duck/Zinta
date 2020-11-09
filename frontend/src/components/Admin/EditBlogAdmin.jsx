@@ -3,13 +3,19 @@ import { Button, Input } from 'reactstrap';
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import DoneSharpIcon from "@material-ui/icons/DoneSharp";
 import ReactQuill from "react-quill";
+import DataTable from "react-data-table-component";
 import "react-quill/dist/quill.snow.css";
 
 const EditBlogAdmin = (props) => {
     
-    const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
+  const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
 	const [blogBody, setBlogBody] = useState(props.blogInfo.body);
-	const [visibility, setVisibility] = useState(props.blogInfo.visibility);
+  const [visibility, setVisibility] = useState(props.blogInfo.visibility);
+  const [blogComments, setBlogComments] = useState(props.blogInfo.comments.map(current => {
+    return {
+      value: current
+    }
+  }))
 
 	const toggleVisibility = () => {
 		if(visibility === "true") {
@@ -87,6 +93,13 @@ const EditBlogAdmin = (props) => {
 		}
     }
 
+    const columns = [
+      {
+          name: "Comments",
+          selector: "value",
+      }
+    ]
+
     return (
       <div>
         <div>
@@ -113,6 +126,17 @@ const EditBlogAdmin = (props) => {
               </span>
             )}
           </Button>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              type="success"
+              color="primary"
+              style={{ margin: "15px" }}
+              onClick={updateBlogHandler}
+            >
+              <DoneSharpIcon /> Save Changes
+            </Button>
+          </div>
         </div>
 
         <div
@@ -160,16 +184,15 @@ const EditBlogAdmin = (props) => {
             }}
           />
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              type="success"
-              color="primary"
-              style={{ margin: "15px" }}
-              onClick={updateBlogHandler}
-            >
-              <DoneSharpIcon /> Save Changes
-            </Button>
-          </div>
+            <DataTable
+                columns={columns}
+                data={blogComments}
+                highlightOnHover
+                pointerOnHover
+                pagination
+                paginationPerPage={10}
+            />
+
         </div>
       </div>
     );
