@@ -27,29 +27,11 @@ const EditBlogAdmin = (props) => {
 
   const uploadImage = (event) => {
     var fileUploaded = event.target.files[0];
-
-    console.log(event.target.files);
-
     var fd = new FormData();
     fd.append("thumbnail", fileUploaded);
-    for (var key of fd.entries()) {
-      console.log("this " + key[0] + ', ' + key[1]);
-  }
-    // console.log("initial", fd);
-    // fd["thumbnail"] = fileUploaded;
-    // fd.append( 
-    //   "thumbnail", 
-    //   uploadImage, 
-    //   uploadImage.name 
-    // ); 
-    // fd.append("something", "value");
-
-    console.log("fd", fd);
+    fd.append("id", props.blogInfo._id);
     fetch("http://localhost:5000/api/update-thumbnail", {
       method: "POST",
-      // headers:{
-      //   "Content-Type" : "multipart/form-data"
-      // },
       body: fd,
     }).then(res => res.json()).then(data => {
       console.log(data);

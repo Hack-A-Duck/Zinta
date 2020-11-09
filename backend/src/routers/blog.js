@@ -1,4 +1,6 @@
 const express = require('express');
+const formidable = require('formidable');
+var fs = require("fs");
 const Blog = require('../models/blog');
 const router = new express.Router();
 
@@ -143,10 +145,23 @@ router.patch('/api/update-blog', async (req, res) => {
 
 //Updating blog thumbnail
 router.post('/api/update-thumbnail', async (req, res) => {
-    console.log(Object.keys(req.body));
-    
-    res.send({status: "200"});
-})
+    new formidable.IncomingForm().parse(req, async (err, body, file) => {
+        if (err) {
+            console.error('Error', err)
+            throw err
+        }
+        // console.log('File', file)
+        var blog = await Blog.findById(body.id);
+        blog.thumbnail.data = fs.readFileSync(file.thumbnail.path);
+        blog.thumbnail.contentType = "image/png";
+        try {
+            await blog.save();
+            res.status(201).send({status: "201"});
+        } catch (e) {
+            res.status(400).send({status: "400", error: e});
+        }
+    })
+});
 
 // Deleting blog
 router.delete('/api/delete-blog', async (req, res) => {
