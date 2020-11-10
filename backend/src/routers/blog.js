@@ -181,7 +181,8 @@ router.post('/api/update-thumbnail', async (req, res) => {
 
 //Getting blog thumbnail
 router.get('/api/get-thumbnail/:id', async (req, res) => {
-    const defaultBuffer = "";
+    const defaultData = "";
+    const defaultContentType = "";
     try {
         const blog = await Blog.findById(req.params.id);
 
@@ -193,8 +194,8 @@ router.get('/api/get-thumbnail/:id', async (req, res) => {
             res.status(404).send({error: "thumbnail not found"})
         }
 
-        res.set('Content-Type', blog.thumbnail.contentType);
-        res.send(blog.thumbnail.data || defaultBuffer);
+        res.set('Content-Type', blog.thumbnail.contentType || defaultContentType);
+        res.send(blog.thumbnail.data || defaultData);
     } catch (e) {
         res.status(404).send({error: "image not found"});
     }
