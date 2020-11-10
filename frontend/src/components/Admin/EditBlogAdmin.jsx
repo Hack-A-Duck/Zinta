@@ -7,8 +7,6 @@ import DataTable from "react-data-table-component";
 import "react-quill/dist/quill.snow.css";
 import "./EditBlogAdmin.css";
 
-const fileToArrayBuffer = require('file-to-array-buffer')
-
 const EditBlogAdmin = (props) => {
   const [blogTitle, setBlogTitle] = useState(props.blogInfo.title);
   const [blogBody, setBlogBody] = useState(props.blogInfo.body);
