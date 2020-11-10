@@ -1,5 +1,5 @@
 #!/bin/sh
-cd frontend/ && npm run build
+cd frontend/ && npm install && npm run build
 echo "static files build"
 cd ..
 if [ -d "backend/build" ]; then
