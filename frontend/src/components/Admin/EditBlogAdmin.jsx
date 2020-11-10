@@ -133,7 +133,7 @@ const EditBlogAdmin = (props) => {
           if (data.status === "400") {
             return window.alert("Some error occured!" + data.error);
           } else {
-            window.alert("Blog updated successfully!!");
+            window.alert("Blog updated successfully!! You might have to manage the updated layout!");
             return props.gotoBack();
           }
         });
