@@ -33,7 +33,7 @@ const FeedbackAdmin = () => {
 
 		setDeleteFeedbackId("");
 
-		fetch("http://localhost:5000/api/delete-feedback", {
+		fetch("/api/delete-feedback", {
 			method: "DELETE",
 			headers: {
 				"Content-type": "application/json",
@@ -47,7 +47,7 @@ const FeedbackAdmin = () => {
 			.then((data) => {
 				console.log("delete successful");
 
-				fetch("http://localhost:5000/api/get-feedbacks", {
+				fetch("/api/get-feedbacks", {
 					method: "GET",
 				})
 					.then((res) => {

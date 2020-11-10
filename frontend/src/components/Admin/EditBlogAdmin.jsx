@@ -28,7 +28,7 @@ const EditBlogAdmin = (props) => {
     var fd = new FormData();
     fd.append("thumbnail", fileUploaded);
     fd.append("id", props.blogInfo._id);
-    fetch("http://localhost:5000/api/update-thumbnail", {
+    fetch("/api/update-thumbnail", {
       method: "POST",
       body: fd,
     }).then(res => res.json()).then(data => {
@@ -38,7 +38,7 @@ const EditBlogAdmin = (props) => {
 
   useEffect(() => {
     if (counter >= 5) {
-      fetch("http://localhost:5000/api/delete-blog", {
+      fetch("/api/delete-blog", {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -117,7 +117,7 @@ const EditBlogAdmin = (props) => {
 
       // console.log(updatedBlogData);
 
-      fetch("http://localhost:5000/api/update-blog", {
+      fetch("/api/update-blog", {
         method: "PATCH",
         headers: {
           Accept: "application/json",
@@ -185,7 +185,7 @@ const EditBlogAdmin = (props) => {
 
         <div>
           <div style={{height: "15vh", width: "15vw"}}>
-            <img style={{height: "100%", width: "100%"}} src={`http://localhost:5000/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
+            <img style={{height: "100%", width: "100%"}} src={`/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
           </div>
           <Button onClick={handleUploadClick} className="p-2" color="primary">
             Upload

@@ -12,7 +12,7 @@ const BlogsAdmin = (props) => {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/api/get-blogs", {
+    fetch("/api/get-blogs", {
       method: "GET"
     })
     .then(res => res.json())

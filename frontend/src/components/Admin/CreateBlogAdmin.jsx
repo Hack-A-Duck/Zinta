@@ -53,7 +53,7 @@ const CreateBlogAdmin = (props) => {
 
 			// console.log(newBlogData);
 
-			fetch("http://localhost:5000/api/create-blog", {
+			fetch("/api/create-blog", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",

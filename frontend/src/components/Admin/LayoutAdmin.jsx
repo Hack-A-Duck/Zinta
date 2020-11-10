@@ -7,7 +7,7 @@ const LayoutAdmin = () => {
 	const [blogLayout, setBlogLayout] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:5000/api/get-visible-blogs", {
+		fetch("/api/get-visible-blogs", {
 			method: "GET"
 		}).then((res) => {
 			return res.json();
@@ -32,7 +32,7 @@ const LayoutAdmin = () => {
 			}
 		});
 		
-		fetch("http://localhost:5000/api/save-layout", {
+		fetch("/api/save-layout", {
 			method: "PATCH",
 			headers: {
 				Accept: "application/json",
@@ -92,7 +92,7 @@ const LayoutAdmin = () => {
 							<div className="blog__body" style={{display: "flex", flexDirection: "column"}}>
 								<div className="blog__left">
 									<div className="blog__image">
-										<img style={{width: "100%", height: "100%"}} src={`http://localhost:5000/api/get-thumbnail/${current.i}`} alt="Blog Image" />
+										<img style={{width: "100%", height: "100%"}} src={`/api/get-thumbnail/${current.i}`} alt="Blog Image" />
 									</div>
 								</div>
 								<div className="blog__right">

@@ -14,7 +14,7 @@ const SingleBLog = (props) => {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/api/get-blog/" + blogId, {
+        fetch("/api/get-blog/" + blogId, {
             method: "GET"
         }).then(data => {
             return data.json();
@@ -33,7 +33,7 @@ const SingleBLog = (props) => {
 
     const refreshComments = () => {
 
-        fetch("http://localhost:5000/api/get-blog/" + blogId, {
+        fetch("/api/get-blog/" + blogId, {
             method: "GET"
         }).then(data => {
             return data.json();
@@ -63,7 +63,7 @@ const SingleBLog = (props) => {
             comment: comment,
         }
 
-        fetch("http://localhost:5000/api/add-comment", {
+        fetch("/api/add-comment", {
             method: "POST",
             headers: {
                 Accept: "application/json",

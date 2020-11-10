@@ -8,7 +8,7 @@ const HomeBody = (props) => {
   const [blogLayout, setBlogLayout] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:5000/api/get-visible-blogs", {
+		fetch("/api/get-visible-blogs", {
 			method: "GET"
 		}).then((res) => {
 			return res.json();
