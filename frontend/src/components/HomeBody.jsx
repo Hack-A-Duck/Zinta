@@ -55,8 +55,10 @@ const HomeBody = (props) => {
           );
         })}
       </GridLayout>
-
-      <FooterDown />
+        
+      <div style={{paddingTop: "10vh", marginTop: "15vh"}}>
+        <FooterDown />
+      </div>
     </div>
   );
 };

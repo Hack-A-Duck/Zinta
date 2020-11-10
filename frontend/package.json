@@ -28,6 +28,7 @@
     "react-tooltip": "^4.2.10",
     "react-web-session": "^0.3.0",
     "reactstrap": "^8.6.0",
+    "remixicon": "^2.5.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
