@@ -187,7 +187,7 @@ router.get('/api/get-thumbnail/:id', async (req, res) => {
         const blog = await Blog.findById(req.params.id);
 
         if(!blog) {
-            res.status(404).send({error: "blog not found"})
+            res.logLayoutstatus(404).send({error: "blog not found"})
         }
 
         if(!blog.thumbnail) {

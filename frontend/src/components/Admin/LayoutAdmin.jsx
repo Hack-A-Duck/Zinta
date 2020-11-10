@@ -22,14 +22,23 @@ const LayoutAdmin = () => {
 	}, []);
 
 	const saveLayoutHandler = () => {
-		// console.log("save this info", blogLayout);
+		const body = blogLayout.map(current => {
+			return {
+				w: current.w,
+				h: current.h,
+				x: current.x,
+				y: current.y,
+				i: current.i,
+			}
+		});
+		
 		fetch("http://localhost:5000/api/save-layout", {
 			method: "PATCH",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({blogs: blogLayout})
+			body: JSON.stringify({blogs: body})
 		}).then((res) => {
 			return res.json();
 		}).then((data) => {
@@ -42,38 +51,24 @@ const LayoutAdmin = () => {
 	}
 
 	const layoutChangeHandler = (currentLayout) => {
-		currentLayout.map(current => {
-			setBlogLayout(blogLayout.map(blog => {
-				if(blog.i !== current.i) {
-					return blog;
-				} else {
-					return {
-						...blog,
-						h: current.h,
-						w: current.w,
-						x: current.x,
-						y: current.y,
+		var updatedLayout = blogLayout;
+		var update = [];
+		for(var i=0; i<currentLayout.length; ++i) {
+			for(var j=0; j<updatedLayout.length; ++j) {
+				if(currentLayout[i].i === updatedLayout[j].i) {
+					var temp = {
+						...updatedLayout[j],
+						w: currentLayout[i].w,
+						h: currentLayout[i].h,
+						x: currentLayout[i].x,
+						y: currentLayout[i].y,
 					}
+					update.push(temp);
 				}
-			}))
-		})
+			}
+		}
 
-		// var updatedLayout = blogLayout;
-		// for(var i=0; i<currentLayout.length; ++i) {
-		// 	for(var j=0; j<updatedLayout.length; ++j) {
-		// 		if(currentLayout[i].i === updatedLayout[j].i) {
-		// 			var temp = {
-		// 				...updatedLayout[i],
-		// 				w: currentLayout[i].w,
-		// 				h: currentLayout[i].h,
-		// 				x: currentLayout[i].x,
-		// 				y: currentLayout[i].y,
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-		// setBlogLayout(updatedLayout);
+		setBlogLayout(update);
 	}
 
 	return (
@@ -92,7 +87,6 @@ const LayoutAdmin = () => {
 				width={window.screen.width}
 			>
 				{blogLayout.map((current) => {
-					// console.log(current);
 					return (
 						<div className="fullcard__container" key={current.i}>
 							<div className="blog__body" style={{display: "flex", flexDirection: "column"}}>
