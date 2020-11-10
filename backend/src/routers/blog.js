@@ -3,6 +3,7 @@ const formidable = require('formidable');
 var fs = require("fs");
 const Blog = require('../models/blog');
 const router = new express.Router();
+const multer = require('multer');
 
 // Getting all blogs
 router.get('/api/get-blogs', async (req, res) => {
@@ -143,6 +144,20 @@ router.patch('/api/update-blog', async (req, res) => {
     }
 });
 
+//converting image into uploadable format
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload an image'))
+        }
+
+        cb(undefined, true)
+    }
+});
+
 //Updating blog thumbnail
 router.post('/api/update-thumbnail', async (req, res) => {
     new formidable.IncomingForm().parse(req, async (err, body, file) => {
@@ -162,6 +177,27 @@ router.post('/api/update-thumbnail', async (req, res) => {
             res.status(400).send({status: "400", error: e});
         }
     })
+});
+
+//Getting blog thumbnail
+router.get('/api/get-thumbnail/:id', async (req, res) => {
+    const defaultBuffer = "";
+    try {
+        const blog = await Blog.findById(req.params.id);
+
+        if(!blog) {
+            res.status(404).send({error: "blog not found"})
+        }
+
+        if(!blog.thumbnail) {
+            res.status(404).send({error: "thumbnail not found"})
+        }
+
+        res.set('Content-Type', blog.thumbnail.contentType);
+        res.send(blog.thumbnail.data || defaultBuffer);
+    } catch (e) {
+        res.status(404).send({error: "image not found"});
+    }
 });
 
 // Deleting blog
