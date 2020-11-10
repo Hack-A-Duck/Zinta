@@ -136,7 +136,7 @@ const CreateBlogAdmin = (props) => {
 				<div style={{ display: "flex", justifyContent: "center" }}>
 					<Button
 						type="success"
-						color="primary"
+						color="success"
 						style={{ margin: "15px" }}
 						onClick={createBlogHandler}
 					>

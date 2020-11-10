@@ -24,8 +24,7 @@ const HomeBody = (props) => {
 	}, []);
 
   return (
-    <div>
-
+    <div style={{backgroundColor:"lightgray"}}>
       <GridLayout
         className="layout"
         layout={blogLayout}
@@ -37,26 +36,29 @@ const HomeBody = (props) => {
           // console.log(current);
           return (
             <div className="fullcard__container" key={current.i}>
-              <Link to={`/blog/${current.i}`}>
-              <div className="blog__body">
-                <div className="blog__left">
-                  <div className="blog__image">
-                    <img src={current.image} alt="Blog" />
-                  </div>
-                </div>
-                <div className="blog__right">
-                  <div className="blog__title">
-                      <h3>{current.title}</h3>
-                  </div>
-                </div>
-              </div>
-              </Link>
-            </div>
+							<div className="blog__body" style={{maxWidth: `${current.w}0vw`, maxHeight: `${current.h}0vh`, display: "flex", flexDirection: "column", backgroundColor:"white"}}>
+								<div className="blog__left">
+									<div className="blog__image" style={{display: "flex", justifyContent: "center"}}>
+										<img style={{width: "100%", maxHeight: "75%"}} src={`http://localhost:5000/api/get-thumbnail/${current.i}`} alt="Blog Image" />
+									</div>
+								</div>
+								<br/>
+								<div className="blog__right">
+									<div style={{display: "flex", justifyContent: "center"}}>
+										<Link style={{color:"black"}} to={`/blog/${current.i}`}>
+											<h3>{current.title}</h3>
+										</Link>
+									</div>
+								</div>
+							</div>
+						</div>
           );
         })}
       </GridLayout>
-
-      <FooterDown />
+        
+      <div style={{paddingTop: "10vh", marginTop: "15vh"}}>
+        <FooterDown />
+      </div>
     </div>
   );
 };

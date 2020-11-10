@@ -133,7 +133,7 @@ const EditBlogAdmin = (props) => {
           if (data.status === "400") {
             return window.alert("Some error occured!" + data.error);
           } else {
-            window.alert("Blog updated successfully!!");
+            window.alert("Blog updated successfully!! You might have to manage the updated layout!");
             return props.gotoBack();
           }
         });
@@ -149,54 +149,59 @@ const EditBlogAdmin = (props) => {
 
   return (
     <div>
-      <div>
-        <Button
-          color="danger"
-          onClick={() => props.gotoBack()}
-          style={{ marginLeft: "10px", marginBottom: "20px" }}
-        >
-          <ArrowBackIosIcon /> Back
-        </Button>
-
-        <Button
-          style={{ marginLeft: "10px", marginBottom: "20px" }}
-          color="primary"
-          onClick={toggleVisibility}
-        >
-          {visibility === "true" ? (
-            <span>
-              <i className="ri-eye-line" /> Visible
-            </span>
-          ) : (
-            <span>
-              <i className="ri-eye-off-line" /> Not visible
-            </span>
-          )}
-        </Button>
-
-        <Button
-          type="success"
-          color="primary"
-          style={{ marginLeft: "10px", marginBottom: "20px" }}
-          onClick={updateBlogHandler}
-        >
-          <DoneSharpIcon /> Save Changes
-        </Button>
-
-        <div>
-          <div style={{height: "15vh", width: "15vw"}}>
-            <img style={{height: "100%", width: "100%"}} src={`/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
-          </div>
-          <Button onClick={handleUploadClick} className="p-2" color="primary">
-            Upload
+      <div name="3 button row" style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+        <div style={{alignItems: "left"}}>
+          <Button
+            color="danger"
+            onClick={() => props.gotoBack()}
+            style={{ marginLeft: "10px", marginBottom: "20px" }}
+          >
+            <ArrowBackIosIcon /> Back
           </Button>
-          <input
-            ref={hiddenFileInput}
-            style={{ display: "none" }}
-            onChange={uploadImage}
-            type="file"
-          />
         </div>
+
+        <div style={{alignItems: "right"}}>
+          <Button
+            style={{ marginLeft: "10px", marginBottom: "20px" }}
+            color="primary"
+            onClick={toggleVisibility}
+          >
+            {visibility === "true" ? (
+              <span>
+                <i className="ri-eye-line" /> Visible
+              </span>
+            ) : (
+              <span>
+                <i className="ri-eye-off-line" /> Not visible
+              </span>
+            )}
+          </Button>
+
+          <Button
+            type="success"
+            color="success"
+            style={{ marginLeft: "10px", marginBottom: "20px" }}
+            onClick={updateBlogHandler}
+          >
+            <i class="ri-save-fill" /> Save Changes
+          </Button>
+        </div>
+        
+      </div>
+
+      <div style={{marginLeft: "1vw", display: "flex", flexDirection: "row", alignItems: "center"}}>
+        <Button onClick={handleUploadClick} className="p-2" color="primary" style={{height: "fit-content", marginRight: "2vw"}}>
+        <i class="ri-upload-cloud-line" /> Upload
+        </Button>
+        <div style={{height: "15vh", width: "15vw"}}>
+          <img style={{height: "100%", width: "100%"}} src={`http://localhost:5000/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
+        </div>
+        <input
+          ref={hiddenFileInput}
+          style={{ display: "none" }}
+          onChange={uploadImage}
+          type="file"
+        />
       </div>
 
       <div
@@ -254,18 +259,23 @@ const EditBlogAdmin = (props) => {
         />
       </div>
 
-      <Button
-        onMouseEnter={() => setTooltipOpen(true)}
-        onMouseLeave={() => setTooltipOpen(false)}
-        color="danger"
-        onClick={() => setCounter(counter + 1)}
-      >
-        Delete Blog
-      </Button>
+      <div style={{marginBottom: "4vh", display: "flex", flexDirection: "column", alignItems: "center"}}>
 
-      {tooltipOpen ? (
-        <p>Click {5 - counter} more times to delete the blog</p>
-      ) : null}
+        <Button
+          onMouseEnter={() => setTooltipOpen(true)}
+          onMouseLeave={() => setTooltipOpen(false)}
+          color="danger"
+          onClick={() => setCounter(counter + 1)}
+          style={{width: "fit-content"}}
+        >
+          <i class="ri-delete-bin-fill" /> Delete Blog
+        </Button>
+
+        {tooltipOpen ? (
+          <p>Click {5 - counter} more times to delete the blog</p>
+        ) : null}
+
+      </div>
     </div>
   );
 };
