@@ -11,7 +11,8 @@ const blogSchema = new mongoose.Schema({
         trim: true
     },
     thumbnail: {
-        type: Buffer
+        data: Buffer,
+        contentType: String
     },
     comments: [{
         type: String

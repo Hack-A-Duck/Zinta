@@ -1,6 +1,9 @@
 const express = require('express');
+const formidable = require('formidable');
+var fs = require("fs");
 const Blog = require('../models/blog');
 const router = new express.Router();
+const multer = require('multer');
 
 // Getting all blogs
 router.get('/api/get-blogs', async (req, res) => {
@@ -138,6 +141,63 @@ router.patch('/api/update-blog', async (req, res) => {
         res.status(200).send({status: "200"});
     } catch (e) {
         res.status(400).send({status: "400", error: e});
+    }
+});
+
+//converting image into uploadable format
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload an image'))
+        }
+
+        cb(undefined, true)
+    }
+});
+
+//Updating blog thumbnail
+router.post('/api/update-thumbnail', async (req, res) => {
+    new formidable.IncomingForm().parse(req, async (err, body, file) => {
+        if (err) {
+            console.error('Error', err)
+            throw err
+        }
+        
+        var blog = await Blog.findById(body.id);
+        blog.thumbnail.data = fs.readFileSync(file.thumbnail.path);
+        blog.thumbnail.contentType = fs.readFileSync(file.thumbnail.type);
+        
+        try {
+            await blog.save();
+            res.status(201).send({status: "201"});
+        } catch (e) {
+            res.status(400).send({status: "400", error: e});
+        }
+    })
+});
+
+//Getting blog thumbnail
+router.get('/api/get-thumbnail/:id', async (req, res) => {
+    const defaultData = "";
+    const defaultContentType = "";
+    try {
+        const blog = await Blog.findById(req.params.id);
+
+        if(!blog) {
+            res.logLayoutstatus(404).send({error: "blog not found"})
+        }
+
+        if(!blog.thumbnail) {
+            res.status(404).send({error: "thumbnail not found"})
+        }
+
+        res.set('Content-Type', blog.thumbnail.contentType || defaultContentType);
+        res.send(blog.thumbnail.data || defaultData);
+    } catch (e) {
+        res.status(404).send({error: "image not found"});
     }
 });
 

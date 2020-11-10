@@ -20,6 +20,21 @@ const EditBlogAdmin = (props) => {
   );
   const [counter, setCounter] = useState(0);
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const hiddenFileInput = React.useRef(null);
+  const handleUploadClick = (e) => hiddenFileInput.current.click();
+
+  const uploadImage = (event) => {
+    var fileUploaded = event.target.files[0];
+    var fd = new FormData();
+    fd.append("thumbnail", fileUploaded);
+    fd.append("id", props.blogInfo._id);
+    fetch("http://localhost:5000/api/update-thumbnail", {
+      method: "POST",
+      body: fd,
+    }).then(res => res.json()).then(data => {
+      console.log(data);
+    });
+  };
 
   useEffect(() => {
     if (counter >= 5) {
@@ -159,14 +174,29 @@ const EditBlogAdmin = (props) => {
           )}
         </Button>
 
-          <Button
-            type="success"
-            color="primary"
-            style={{ marginLeft: "10px", marginBottom: "20px" }}
-            onClick={updateBlogHandler}
-          >
-            <DoneSharpIcon /> Save Changes
+        <Button
+          type="success"
+          color="primary"
+          style={{ marginLeft: "10px", marginBottom: "20px" }}
+          onClick={updateBlogHandler}
+        >
+          <DoneSharpIcon /> Save Changes
+        </Button>
+
+        <div>
+          <div style={{height: "15vh", width: "15vw"}}>
+            <img style={{height: "100%", width: "100%"}} src={`http://localhost:5000/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
+          </div>
+          <Button onClick={handleUploadClick} className="p-2" color="primary">
+            Upload
           </Button>
+          <input
+            ref={hiddenFileInput}
+            style={{ display: "none" }}
+            onChange={uploadImage}
+            type="file"
+          />
+        </div>
       </div>
 
       <div
