@@ -194,7 +194,7 @@ const EditBlogAdmin = (props) => {
         <i class="ri-upload-cloud-line" /> Upload
         </Button>
         <div style={{height: "15vh", width: "15vw"}}>
-          <img style={{height: "100%", width: "100%"}} src={`http://localhost:5000/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
+          <img style={{height: "100%", width: "100%"}} src={`/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
         </div>
         <input
           ref={hiddenFileInput}

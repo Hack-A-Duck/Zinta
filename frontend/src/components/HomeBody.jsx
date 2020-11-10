@@ -39,7 +39,7 @@ const HomeBody = (props) => {
 							<div className="blog__body" style={{maxWidth: `${current.w}0vw`, maxHeight: `${current.h}0vh`, display: "flex", flexDirection: "column", backgroundColor:"white"}}>
 								<div className="blog__left">
 									<div className="blog__image" style={{display: "flex", justifyContent: "center"}}>
-										<img style={{width: "100%", maxHeight: "75%"}} src={`http://localhost:5000/api/get-thumbnail/${current.i}`} alt="Blog Image" />
+										<img style={{width: "100%", maxHeight: "75%"}} src={`/api/get-thumbnail/${current.i}`} alt="Blog Image" />
 									</div>
 								</div>
 								<br/>
