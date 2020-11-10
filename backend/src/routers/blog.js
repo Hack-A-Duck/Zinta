@@ -168,7 +168,7 @@ router.post('/api/update-thumbnail', async (req, res) => {
         
         var blog = await Blog.findById(body.id);
         blog.thumbnail.data = fs.readFileSync(file.thumbnail.path);
-        blog.thumbnail.contentType = fs.readFileSync(file.thumbnail.type);
+        blog.thumbnail.contentType = file.thumbnail.type;
         
         try {
             await blog.save();
