@@ -16,7 +16,7 @@ function NavbarTop() {
 	const toggle = () => setIsOpen(!isOpen);
 	return (
 		<div>
-			<Navbar color="light" light expand="md">
+			<Navbar style={{backgroundColor:"#8572f0"}} dark expand="md">
 				<Link to="/">
 					<NavbarBrand>ZINTA</NavbarBrand>
 				</Link>
@@ -25,13 +25,13 @@ function NavbarTop() {
 					<Nav className="mr-auto" navbar>
 						<Link to="/" style={{ textDecoration: "none" }}>
 							<NavItem>
-								<NavLink>Home</NavLink>
+								<NavLink><strong>Home</strong></NavLink>
 							</NavItem>
 						</Link>
 
 						<Link to="/feedback" style={{ textDecoration: "none" }}>
 							<NavItem>
-								<NavLink>Feedback</NavLink>
+								<NavLink><strong>Feedback</strong></NavLink>
 							</NavItem>
 						</Link>
 					</Nav>

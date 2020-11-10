@@ -74,9 +74,6 @@ function FooterDown() {
 				<MDBContainer>
 					<MDBRow className="pt-5 mb-3 text-center d-flex justify-content-center footer__headers">
 						<MDBCol md="2" className="b-3">
-							<h6 className="title font-weight-bold">
-								<a href="#!">Help</a>
-							</h6>
 						</MDBCol>
 						<MDBCol md="2" className="b-3">
 							<h6 className="title font-weight-bold">
@@ -86,9 +83,6 @@ function FooterDown() {
 							</h6>
 						</MDBCol>
 						<MDBCol md="2" className="b-3">
-							<h6 className="title font-weight-bold">
-								<a href="#!">Contact</a>
-							</h6>
 						</MDBCol>
 					</MDBRow>
 					<hr
@@ -116,7 +110,7 @@ function FooterDown() {
 				</MDBContainer>
 				<div className="footer-copyright text-center py-3">
 					<MDBContainer fluid>
-						&copy; {new Date().getFullYear()} Copyright: ZINTA ~ MVK
+						&copy; {new Date().getFullYear()} Copyright: ZINTA ~ KV
 					</MDBContainer>
 				</div>
 			</MDBFooter>

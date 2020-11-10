@@ -83,12 +83,16 @@ const SingleBLog = (props) => {
 
     return (
         <div>
-            <NavbarTop />
-            <h1>{blogTitle}</h1>
-            {ReactHtmlParser(blogBody)}
-            <div>
-                <Input placeholder="Add comment" value={comment} onChange={e => setComment(e.target.value)} />
-                <Button onClick={addCommentHandler}>Add comment</Button>
+            <NavbarTop /><br/>
+            <div style={{margin:"0 2vh"}}>
+                <h1 style={{fontSize:"40px"}}>{blogTitle}</h1>
+            </div><br/>
+            <div style={{margin:"0 2vh", fontSize:"18px"}}>
+                {ReactHtmlParser(blogBody)}
+            </div>
+            <div style={{margin:"0 2vh", display:"flex", flexDirection:"row"}}>
+                <Input style={{width:"50vw"}} placeholder="Add comment" value={comment} onChange={e => setComment(e.target.value)} />
+                <Button style={{backgroundColor:"#8572f0", marginLeft:"1vw"}} onClick={addCommentHandler}><span style={{display:"flex", justifyContent:"center", flexDirection:"row"}}>Add comment {" "}<i class="ri-send-plane-2-fill"></i></span></Button>
             </div>
             <div>
                 <DataTable
