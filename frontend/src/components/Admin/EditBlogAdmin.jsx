@@ -146,6 +146,20 @@ const EditBlogAdmin = (props) => {
     },
   ];
 
+  const changeHandler = (e) => {
+    setBlogBody(e);
+    document.querySelectorAll("p").forEach((current) => {
+      if (current.children.length === 1) {
+        const childComponent = current.children[0];
+        if(!childComponent.hasChildNodes() && current.innerHTML.substring(0,4) === "<img") {
+          current.style = "width: 25vw;"
+          current.innerHTML = current.innerHTML.substring(0,4) + " style='width: 100%;' " + current.innerHTML.substr(5);
+        }
+        
+      }
+    });
+  };
+
   return (
     <div>
       <div
@@ -261,7 +275,7 @@ const EditBlogAdmin = (props) => {
           modules={modules}
           formats={formats}
           defaultValue={blogBody}
-          onChange={(e) => setBlogBody(e)}
+          onChange={(e) => changeHandler(e)}
           style={{
             width: "95%",
             textAlign: "left",

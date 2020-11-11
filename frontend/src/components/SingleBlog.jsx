@@ -20,6 +20,8 @@ const SingleBLog = (props) => {
             return data.json();
         }).then(data => {
             setBlogTitle(data[0].title);
+            // const temp = data[0].body;
+            // console.log(temp)
             setBlogBody(data[0].body);
             setBlogComments(data[0].comments.map(current => {
                 return {
