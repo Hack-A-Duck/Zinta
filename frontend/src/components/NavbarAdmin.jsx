@@ -11,31 +11,31 @@ const NavbarAdmin = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+			<Navbar style={{backgroundColor:"#8572f0"}} dark expand="md">
         <Nav className="mr-auto" navbar>
           <NavItem
             style={{ cursor: "pointer" }}
             onClick={() => props.gotoLayout()}
           >
-            <NavLink>Layout</NavLink>
+            <NavLink><strong>Layout</strong></NavLink>
           </NavItem>
 
           <NavItem
             style={{ cursor: "pointer" }}
             onClick={() => props.gotoBlogs()}
           >
-            <NavLink>Manage Blogs</NavLink>
+            <NavLink><strong>Manage Blogs</strong></NavLink>
           </NavItem>
 
           <NavItem
             style={{ cursor: "pointer" }}
             onClick={() => props.gotoFeedback()}
           >
-            <NavLink>Feedback</NavLink>
+            <NavLink><strong>Feedback</strong></NavLink>
           </NavItem>
 
           <NavItem style={{ cursor: "pointer" }} onClick={handleLogout}>
-            <NavLink>Logout</NavLink>
+            <NavLink><strong>Logout</strong></NavLink>
           </NavItem>
         </Nav>
       </Navbar>
