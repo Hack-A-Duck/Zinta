@@ -81,7 +81,7 @@ const CreateBlogAdmin = (props) => {
 				<Button
 					color="danger"
 					onClick={() => props.gotoBack()}
-					style={{ marginLeft: "10px", marginBottom: "20px" }}
+					style={{marginTop:"10px", marginLeft: "10px", marginBottom: "20px" }}
 				>
 					<ArrowBackIosIcon /> Back
 				</Button>

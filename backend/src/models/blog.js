@@ -39,7 +39,7 @@ const blogSchema = new mongoose.Schema({
     },
     h: {
         type: Number,
-        default: 4
+        default: 10
     }
 });
 

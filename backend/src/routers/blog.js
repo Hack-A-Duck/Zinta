@@ -77,17 +77,15 @@ router.post('/api/create-blog', async (req, res) => {
 async function findNewPosition(blogPosition) {
     blogPosition = {
         "x": 0,
-        "y": 0,
-        "w": 4,
-        "h": 4
+        "y": 0
     }
     try {
         var blogs = await Blog.find({"visibility": "true"});
     } catch (e) {
         return blogPosition;
     }
-    for(blog in blogs){
-        blogPosition["y"] = Math.max(blogPosition["y"], blog["y"] + blog["h"]);
+    for(blog of blogs){
+        blogPosition["y"] = Math.max(blogPosition["y"], blog._doc["y"] + blog._doc["h"]);
     }
     return blogPosition;
 }
@@ -132,7 +130,7 @@ router.patch('/api/update-blog', async (req, res) => {
         const blog = await Blog.findById(req.body.id);
         const previousVisibility = blog["visibility"]
         if (updateData["visibility"] === "true" && previousVisibility === "false"){
-            const blogPosition = findNewPosition();
+            const blogPosition = await findNewPosition();
             updateData = {...updateData, ...blogPosition};
         }
         await Blog.findByIdAndUpdate(req.body.id, updateData);
