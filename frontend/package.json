@@ -12,6 +12,7 @@
     "file-to-array-buffer": "^1.0.0",
     "firebase": "^8.0.0",
     "mdbreact": "^4.27.0",
+    "quill-image-resize-module-react": "^3.0.0",
     "re-resizable": "^6.7.0",
     "react": "^17.0.1",
     "react-data-table-component": "^6.11.5",
