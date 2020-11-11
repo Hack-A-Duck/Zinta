@@ -74,7 +74,7 @@ const LayoutAdmin = () => {
 	return (
 		<div style={{backgroundColor:"lightgray"}}>
 
-			<Button color="success" onClick={saveLayoutHandler}>
+			<Button style={{marginLeft:"10px", marginTop:"10px"}} color="success" onClick={saveLayoutHandler}>
 				Save Layout
 			</Button>
 
@@ -88,8 +88,8 @@ const LayoutAdmin = () => {
 			>
 				{blogLayout.map((current) => {
 					return (
-						<div className="fullcard__container" key={current.i}>
-							<div className="blog__body" style={{maxWidth: `${current.w}0vw`, maxHeight: `${current.h}0vh`, display: "flex", flexDirection: "column", backgroundColor:"white"}}>
+						<div style={{backgroundColor:"white", borderRadius:"5px", border:"3px solid #b9b2e2"}} className="fullcard__container" key={current.i}>
+							<div className="blog__body" style={{maxWidth: `${current.w}0vw`, maxHeight: `${current.h}0vh`, display: "flex", flexDirection: "column"}}>
 								<div className="blog__left">
 									<div className="blog__image" style={{display: "flex", justifyContent: "center"}}>
 										<img style={{width: "100%", maxHeight: "75%"}} src={`http://localhost:5000/api/get-thumbnail/${current.i}`} alt="Blog Image" />

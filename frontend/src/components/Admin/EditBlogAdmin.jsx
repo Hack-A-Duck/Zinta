@@ -168,13 +168,15 @@ const EditBlogAdmin = (props) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          marginTop: "10px",
+          marginRight: "10px",
         }}
       >
         <div style={{ alignItems: "left" }}>
           <Button
             color="danger"
             onClick={() => props.gotoBack()}
-            style={{ marginLeft: "10px", marginBottom: "20px" }}
+            style={{ marginLeft: "15px", marginBottom: "20px" }}
           >
             <ArrowBackIosIcon /> Back
           </Button>

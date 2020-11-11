@@ -43,7 +43,7 @@ const BlogsAdmin = (props) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div
-        style={{ display: "flex", justifyContent: "right", marginRight: "5vw" }}
+        style={{ display: "flex", marginLeft:"15px", marginTop:"15px"}}
       >
         <Button color="success" onClick={() => props.gotoCreate()}>
           {/* <Link style={{textDecoration: "none"}} to="/admin/create-new-blog" > */}
