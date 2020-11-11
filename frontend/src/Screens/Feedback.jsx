@@ -52,18 +52,6 @@ function Feedback() {
 		}
 	}
 
-	const resetAllStates = () => {
-		setName("");
-		setEmail("");
-		setMessage("");
-		setRating(0);
-		setPresentation(false);
-		setContent(false);
-		setLinguistics(false);
-		setAccuracy(false);
-		setNone(false);
-	}
-
 	const submitHandler = () => {
 
 		if(name.trim().length === 0) {
@@ -102,8 +90,6 @@ function Feedback() {
       		.then((data) => {});
 
 		toggle();
-		// setTimeout(() => resetAllStates(), 1000);
-		// resetAllStates();
 	}
 
 	//handleSubmit()

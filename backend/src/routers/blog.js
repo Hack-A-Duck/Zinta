@@ -19,7 +19,11 @@ router.get('/api/get-blogs', async (req, res) => {
 router.get('/api/get-visible-blogs', async (req, res) => {
     try {
         var blogs = await Blog.find({visibility: "true"});
-        res.status(200).send(blogs);
+        const prunedBlogs = blogs.map(current => {
+            delete current._doc["body"];
+            return current;
+        })
+        res.status(200).send(prunedBlogs);
 
     } catch (e) {
         res.status(400).send(e);
@@ -62,9 +66,6 @@ router.patch('/api/save-layout', async (req, res) => {
 // Creating new blog
 router.post('/api/create-blog', async (req, res) => {
     var blog = new Blog(req.body);
-    if(Object.keys(req).indexOf("file") !== -1){
-        blog["thumbnail"] = req.file.buffer; 
-    }
     try {
         await blog.save();
         res.status(201).send({status: "201"});
@@ -127,9 +128,6 @@ router.post('/api/add-comment', async (req, res) => {
 router.patch('/api/update-blog', async (req, res) => {
     var updateData = req.body
     updateData["date"] = Date.now()
-    if(Object.keys(req).indexOf("file") !== -1){
-        blog["thumbnail"] = req.file.buffer; 
-    }
     try {
         const blog = await Blog.findById(req.body.id);
         const previousVisibility = blog["visibility"]
@@ -147,7 +145,7 @@ router.patch('/api/update-blog', async (req, res) => {
 //converting image into uploadable format
 const upload = multer({
     limits: {
-        fileSize: 1000000
+        fileSize: 100000
     },
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {

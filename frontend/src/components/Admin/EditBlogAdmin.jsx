@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input } from "reactstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import DoneSharpIcon from "@material-ui/icons/DoneSharp";
 import ReactQuill from "react-quill";
 import DataTable from "react-data-table-component";
 import "react-quill/dist/quill.snow.css";
@@ -31,9 +30,8 @@ const EditBlogAdmin = (props) => {
     fetch("/api/update-thumbnail", {
       method: "POST",
       body: fd,
-    }).then(res => res.json()).then(data => {
-      console.log(data);
-    });
+    }).then(res => res.json()).then(data => {});
+
   };
 
   useEffect(() => {
@@ -147,20 +145,43 @@ const EditBlogAdmin = (props) => {
     },
   ];
 
+  const changeHandler = (e) => {
+    setBlogBody(e);
+    document.querySelectorAll("p").forEach((current) => {
+      if (current.children.length === 1) {
+        const childComponent = current.children[0];
+        if(!childComponent.hasChildNodes() && current.innerHTML.substring(0,4) === "<img") {
+          current.style = "width: 25vw;"
+          current.innerHTML = current.innerHTML.substring(0,4) + " style='width: 100%;' " + current.innerHTML.substr(5);
+        }
+        
+      }
+    });
+  };
+
   return (
     <div>
-      <div name="3 button row" style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-        <div style={{alignItems: "left"}}>
+      <div
+        name="3 button row"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginTop: "10px",
+          marginRight: "10px",
+        }}
+      >
+        <div style={{ alignItems: "left" }}>
           <Button
             color="danger"
             onClick={() => props.gotoBack()}
-            style={{ marginLeft: "10px", marginBottom: "20px" }}
+            style={{ marginLeft: "15px", marginBottom: "20px" }}
           >
             <ArrowBackIosIcon /> Back
           </Button>
         </div>
 
-        <div style={{alignItems: "right"}}>
+        <div style={{ alignItems: "right" }}>
           <Button
             style={{ marginLeft: "10px", marginBottom: "20px" }}
             color="primary"
@@ -186,15 +207,30 @@ const EditBlogAdmin = (props) => {
             <i class="ri-save-fill" /> Save Changes
           </Button>
         </div>
-        
       </div>
 
-      <div style={{marginLeft: "1vw", display: "flex", flexDirection: "row", alignItems: "center"}}>
-        <Button onClick={handleUploadClick} className="p-2" color="primary" style={{height: "fit-content", marginRight: "2vw"}}>
-        <i class="ri-upload-cloud-line" /> Upload
+      <div
+        style={{
+          marginLeft: "1vw",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          onClick={handleUploadClick}
+          className="p-2"
+          color="primary"
+          style={{ height: "fit-content", marginRight: "2vw" }}
+        >
+          <i class="ri-upload-cloud-line" /> Upload
         </Button>
-        <div style={{height: "15vh", width: "15vw"}}>
-          <img style={{height: "100%", width: "100%"}} src={`/api/get-thumbnail/${props.blogInfo._id}`} alt="image" />
+        <div style={{ height: "15vh", width: "15vw" }}>
+          <img
+            style={{ height: "100%", width: "100%" }}
+            src={`/api/get-thumbnail/${props.blogInfo._id}`}
+            alt="image"
+          />
         </div>
         <input
           ref={hiddenFileInput}
@@ -216,7 +252,7 @@ const EditBlogAdmin = (props) => {
       >
         <h4>TITLE</h4>
         <Input
-          placeholder="TItle of blog"
+          placeholder="Title of blog"
           value={blogTitle}
           onChange={(e) => setBlogTitle(e.target.value)}
           style={{ width: "40vw" }}
@@ -240,7 +276,7 @@ const EditBlogAdmin = (props) => {
           modules={modules}
           formats={formats}
           defaultValue={blogBody}
-          onChange={(e) => setBlogBody(e)}
+          onChange={(e) => changeHandler(e)}
           style={{
             width: "95%",
             textAlign: "left",
@@ -259,14 +295,20 @@ const EditBlogAdmin = (props) => {
         />
       </div>
 
-      <div style={{marginBottom: "4vh", display: "flex", flexDirection: "column", alignItems: "center"}}>
-
+      <div
+        style={{
+          marginBottom: "4vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Button
           onMouseEnter={() => setTooltipOpen(true)}
           onMouseLeave={() => setTooltipOpen(false)}
           color="danger"
           onClick={() => setCounter(counter + 1)}
-          style={{width: "fit-content"}}
+          style={{ width: "fit-content" }}
         >
           <i class="ri-delete-bin-fill" /> Delete Blog
         </Button>
@@ -274,7 +316,6 @@ const EditBlogAdmin = (props) => {
         {tooltipOpen ? (
           <p>Click {5 - counter} more times to delete the blog</p>
         ) : null}
-
       </div>
     </div>
   );
