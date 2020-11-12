@@ -73,11 +73,11 @@ function Feedback() {
 		const data = {
 			name: name,
 			email: email,
-			message: message | "No Message",
-			rating: rating | 0,
-			checkbox: checkboxes | []
+			message: message || "No Message",
+			rating: rating || 5,
+			checkbox: checkboxes || ["none"]
 		};
-
+		// console.log(data);
 		fetch("http://localhost:5000/api/create-feedback", {
       		method: "POST",
       		headers: {
