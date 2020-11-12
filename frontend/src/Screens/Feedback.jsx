@@ -73,9 +73,9 @@ function Feedback() {
 		const data = {
 			name: name,
 			email: email,
-			message: message | "No Message",
-			rating: rating | 0,
-			checkbox: checkboxes | []
+			message: message || "No Message",
+			rating: rating || 5,
+			checkbox: checkboxes || ["none"]
 		};
 
 		fetch("/api/create-feedback", {
