@@ -6,6 +6,13 @@
 #
 ## Link to the website - [https://hack-a-blog.herokuapp.com](https://hack-a-blog.herokuapp.com/)
 
+## Admin credentials:
+Click on the logo present in footer to open login popup.
+
+Email: m@g.com
+
+Password: 123456
+
 For starting website locally, from inside "hack-a-blog" , open 2 terminals
 
 In terminal 1:
