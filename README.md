@@ -2,7 +2,7 @@
 ### Members :
 1. Vaibhav
 2. Khush Deep Saini
-3. Mukul Choudhary
+3. Mukul Choudhury
 #
 ## Link to the website - [https://hack-a-blog.herokuapp.com](https://hack-a-blog.herokuapp.com/)
 
